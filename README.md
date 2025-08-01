@@ -1,4 +1,5 @@
 # Fábrica de Software 2025/1
+Alunos: Fellipe N. Prim e Lucas Felipe
 
 ## Proposta
 
