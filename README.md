@@ -21,4 +21,3 @@ Este repositório será utilizado para organizar todo o código-fonte, documenta
 
 ---
 
-Se quiser, posso ajudar a complementar com instruções para rodar o projeto, estrutura das pastas, ou roadmap inicial! Quer?
