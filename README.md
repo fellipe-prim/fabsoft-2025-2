@@ -52,6 +52,183 @@ O desenvolvimento seguirá os princípios da **Clean Architecture**, garantindo 
     *Como administrador, quero remover sessões que foram canceladas ou já expiraram para manter o sistema atualizado e evitar confusões para os usuários.*
   - Consulta detalhada das sessões disponíveis
 
+  ## Aula 19/08
+## Diagrama de entidades
+
+- [Extensão Mermaid](https://marketplace.visualstudio.com/items?itemName=vstirbu.vscode-mermaid-preview)
+- [Mermaid ClassDiagram](https://github.com/mermaid-js/mermaid/blob/develop/packages/mermaid/src/docs/syntax/classDiagram.md)
+
+| Type    | Description   |
+| ------- | ------------- |
+| `<\|--` | Inheritance   |
+| `*--`   | Composition   |
+| `o--`   | Aggregation   |
+| `-->`   | Association   |
+| `--`    | Link (Solid)  |
+| `..>`   | Dependency    |
+| `..\|>` | Realization   |
+| `..`    | Link (Dashed) |
+
+
+## Aula 19/08
+## Diagrama de entidades
+
+- [Extensão Mermaid](https://marketplace.visualstudio.com/items?itemName=vstirbu.vscode-mermaid-preview)
+- [Mermaid ClassDiagram](https://github.com/mermaid-js/mermaid/blob/develop/packages/mermaid/src/docs/syntax/classDiagram.md)
+
+| Type    | Description   |
+| ------- | ------------- |
+| `<\|--` | Inheritance   |
+| `*--`   | Composition   |
+| `o--`   | Aggregation   |
+| `-->`   | Association   |
+| `--`    | Link (Solid)  |
+| `..>`   | Dependency    |
+| `..\|>` | Realization   |
+| `..`    | Link (Dashed) |
+
+```mermaid
+
+classDiagram
+  direction TB
+    class Filme {
+	    +Long id
+	    +String titulo
+	    +String sinopse
+	    +int duracao
+	    +String classificacao
+	    +String genero
+	    +String imagemUrl
+	    +getId()
+	    +setId(Long id)
+	    +getTitulo()
+	    +setTitulo(String titulo)
+	    +getSinopse()
+	    +setSinopse(String sinopse)
+	    +getDuracao()
+	    +setDuracao(int duracao)
+	    +getClassificacao()
+	    +setClassificacao(String classificacao)
+	    +getGenero()
+	    +setGenero(String genero)
+	    +getImagemUrl()
+	    +setImagemUrl(String imagemUrl)
+    }
+
+    class Sessao {
+	    +Long id
+	    +LocalDateTime dataHora
+	    +Sala sala
+	    +Filme filme
+	    +List~Assento~ assentos
+	    +getId()
+	    +setId(Long id)
+	    +getDataHora()
+	    +setDataHora(LocalDateTime dataHora)
+	    +getSala()
+	    +setSala(Sala sala)
+	    +getFilme()
+	    +setFilme(Filme filme)
+	    +getAssentos()
+	    +setAssentos(List~Assento~ assentos)
+    }
+
+    class Sala {
+	    +Long id
+	    +String nome
+	    +int capacidade
+	    +List~Assento~ assentos
+	    +getId()
+	    +setId(Long id)
+	    +getNome()
+	    +setNome(String nome)
+	    +getCapacidade()
+	    +setCapacidade(int capacidade)
+	    +getAssentos()
+	    +setAssentos(List~Assento~ assentos)
+    }
+
+    class Assento {
+	    +Long id
+	    +String numero
+	    +boolean disponivel
+	    +String tipo
+	    +getId()
+	    +setId(Long id)
+	    +getNumero()
+	    +setNumero(String numero)
+	    +isDisponivel()
+	    +setDisponivel(boolean disponivel)
+	    +getTipo()
+	    +setTipo(String tipo)
+    }
+
+    class Usuario {
+	    +Long id
+	    +String nome
+	    +String email
+	    +String senha
+	    +TipoUsuario tipo
+	    +getId()
+	    +setId(Long id)
+	    +getNome()
+	    +setNome(String nome)
+	    +getEmail()
+	    +setEmail(String email)
+	    +getSenha()
+	    +setSenha(String senha)
+	    +getTipo()
+	    +setTipo(TipoUsuario tipo)
+    }
+
+    class Ingresso {
+	    +Long id
+	    +Sessao sessao
+	    +Usuario usuario
+	    +List~Assento~ assentos
+	    +StatusIngresso status
+	    +LocalDateTime dataCompra
+	    +getId()
+	    +setId(Long id)
+	    +getSessao()
+	    +setSessao(Sessao sessao)
+	    +getUsuario()
+	    +setUsuario(Usuario usuario)
+	    +getAssentos()
+	    +setAssentos(List~Assento~ assentos)
+	    +getStatus()
+	    +setStatus(StatusIngresso status)
+	    +getDataCompra()
+	    +setDataCompra(LocalDateTime dataCompra)
+    }
+
+    class TipoUsuario {
+	    ADMIN
+	    COMUM
+    }
+
+    class StatusIngresso {
+	    RESERVADO
+	    PAGO
+    }
+
+	<<enumeration>> TipoUsuario
+	<<enumeration>> StatusIngresso
+
+    Filme "*" --> "1" Sessao
+    Sala "*" --> "1" Sessao
+    Sala "*" --> "1" Assento : <br>
+    Sessao "*" --> "1" Assento : <br>
+    Usuario "*" --> "1" Ingresso
+    Sessao "*" --> "1" Ingresso : <br>
+    Ingresso "*" -- "1" Assento : <br>
+
+
+
+```
+
+```
+
 
 ---
 
