@@ -12,8 +12,36 @@ public class Filme {
     private long id;
     private String titulo;
     private String sinopse;
+    private int duracao;
+    private String classificacao;
+    private String genero;
+    private String imagemURL;
 
 
+    public int getDuracao() {
+        return duracao;
+    }
+    public void setDuracao(int duracao) {
+        this.duracao = duracao;
+    }
+    public String getClassificacao() {
+        return classificacao;
+    }
+    public void setClassificacao(String classificacao) {
+        this.classificacao = classificacao;
+    }
+    public String getGenero() {
+        return genero;
+    }
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+    public String getImagemURL() {
+        return imagemURL;
+    }
+    public void setImagemURL(String imagemURL) {
+        this.imagemURL = imagemURL;
+    }
     public long getId() {
         return id;
     }
