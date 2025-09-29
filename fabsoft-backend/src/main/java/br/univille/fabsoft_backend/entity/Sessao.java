@@ -1,5 +1,5 @@
 package br.univille.fabsoft_backend.entity;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -8,31 +8,38 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Sala {
+public class Sessao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private int capacidade;
+    private LocalDateTime dataHora;
+    private Sala sala;
+    private Filme filme;
     private List<Assento> assentos;
-    
+
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public String getNome() {
-        return nome;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
-    public int getCapacidade() {
-        return capacidade;
+    public Sala getSala() {
+        return sala;
     }
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+    public Filme getFilme() {
+        return filme;
+    }
+    public void setFilme(Filme filme) {
+        this.filme = filme;
     }
     public List<Assento> getAssentos() {
         return assentos;
