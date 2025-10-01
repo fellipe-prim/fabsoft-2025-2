@@ -56,6 +56,33 @@ Content-Type: application/json
   "imagemURL": "https://link-da-imagem.com/interestelar.jpg"
 }
 
+### POST criar novo filme
+POST http://localhost:8080/filmes
+Content-Type: application/json
+
+{
+  "titulo": "A Origem",
+  "sinopse": "Um ladrão especializado em extrair segredos corporativos dos sonhos é desafiado a plantar uma ideia na mente de um herdeiro.",
+  "duracao": 148,
+  "classificacao": "14 anos",
+  "genero": "Ficção Científica / Suspense",
+  "imagemURL": "https://link-da-imagem.com/a-origem.jpg"
+}
+
+### POST criar novo filme
+POST http://localhost:8080/filmes
+Content-Type: application/json
+
+{
+  "titulo": "O Senhor dos Anéis: A Sociedade do Anel",
+  "sinopse": "Um jovem hobbit parte em uma jornada para destruir um anel poderoso e impedir que o mal domine a Terra-média.",
+  "duracao": 178,
+  "classificacao": "12 anos",
+  "genero": "Fantasia / Aventura",
+  "imagemURL": "https://link-da-imagem.com/sociedade-do-anel.jpg"
+}
+
+
 ### PUT atualizar filme existente
 PUT http://localhost:8080/filmes/1
 Content-Type: application/json
