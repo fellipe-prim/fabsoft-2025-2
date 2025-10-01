@@ -1,0 +1,31 @@
+### GET todas as sessões
+GET http://localhost:8080/sessoes
+Content-Type: application/json
+
+### GET sessão por ID
+GET http://localhost:8080/sessoes/1
+Content-Type: application/json
+
+### POST criar nova sessão
+POST http://localhost:8080/sessoes
+Content-Type: application/json
+
+{
+  "dataHora": "2025-10-01T20:30:00",
+  "sala": { "id": 1 },
+  "filme": { "id": 2 }
+}
+
+### PUT atualizar sessão existente
+PUT http://localhost:8080/sessoes/1
+Content-Type: application/json
+
+{
+  "dataHora": "2025-10-02T18:00:00",
+  "sala": { "id": 1 },
+  "filme": { "id": 3 }
+}
+
+### DELETE excluir sessão por ID
+DELETE http://localhost:8080/sessoes/1
+Content-Type: application/json
