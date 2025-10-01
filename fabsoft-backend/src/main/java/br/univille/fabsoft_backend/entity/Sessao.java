@@ -6,16 +6,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Sessao {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dataHora;
+    @OneToOne
     private Sala sala;
+    @OneToOne
     private Filme filme;
-    private List<Assento> assentos;
 
     public Long getId() {
         return id;
@@ -40,11 +43,5 @@ public class Sessao {
     }
     public void setFilme(Filme filme) {
         this.filme = filme;
-    }
-    public List<Assento> getAssentos() {
-        return assentos;
-    }
-    public void setAssentos(List<Assento> assentos) {
-        this.assentos = assentos;
     }
 }

@@ -4,19 +4,39 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Ingresso {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
     private Sessao sessao;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-    private List<Assento> assentos;
-    private StatusIngresso status;
+    
+    private StatusIngresso status;public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     private LocalDateTime dataCompra;
 
     public Long getId() { return id; }
@@ -25,15 +45,10 @@ public class Ingresso {
     public Sessao getSessao() { return sessao; }
     public void setSessao(Sessao sessao) { this.sessao = sessao; }
     
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
-    
-    public List<Assento> getAssentos() { return assentos; }
-    public void setAssentos(List<Assento> assentos) { this.assentos = assentos; }
-    
-    public StatusIngresso getStatus() { return status; }
+
     public void setStatus(StatusIngresso status) { this.status = status; }
     
     public LocalDateTime getDataCompra() { return dataCompra; }
     public void setDataCompra(LocalDateTime dataCompra) { this.dataCompra = dataCompra; }
+    
 }
