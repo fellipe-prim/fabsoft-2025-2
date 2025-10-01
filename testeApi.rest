@@ -11,9 +11,10 @@ POST http://localhost:8080/sessoes
 Content-Type: application/json
 
 {
-  "dataHora": "2025-10-01T20:30:00",
-  "sala": { "id": 1 },
-  "filme": { "id": 2 }
+  "data": "2025-10-05",
+  "horario": "20:00",
+  "filme": { "id": 1 },
+  "sala": { "id": 1 }
 }
 
 ### PUT atualizar sessão existente
@@ -28,4 +29,82 @@ Content-Type: application/json
 
 ### DELETE excluir sessão por ID
 DELETE http://localhost:8080/sessoes/1
+Content-Type: application/json
+
+### ================================
+### FILMES
+### ================================
+
+### GET todos os filmes
+GET http://localhost:8080/filmes
+Content-Type: application/json
+
+### GET filme por ID
+GET http://localhost:8080/filmes/1
+Content-Type: application/json
+
+### POST criar novo filme
+POST http://localhost:8080/filmes
+Content-Type: application/json
+
+{
+  "titulo": "Interestelar",
+  "sinopse": "Um grupo de astronautas viaja através de um buraco de minhoca em busca de um novo lar para a humanidade.",
+  "duracao": 169,
+  "classificacao": "12 anos",
+  "genero": "Ficção Científica",
+  "imagemURL": "https://link-da-imagem.com/interestelar.jpg"
+}
+
+### PUT atualizar filme existente
+PUT http://localhost:8080/filmes/1
+Content-Type: application/json
+
+{
+  "titulo": "Interestelar (Versão Estendida)",
+  "sinopse": "Versão estendida do clássico de ficção científica de Christopher Nolan.",
+  "duracao": 175,
+  "classificacao": "12 anos",
+  "genero": "Ficção Científica / Drama",
+  "imagemURL": "https://link-da-imagem.com/interestelar-extended.jpg"
+}
+
+### DELETE remover filme por ID
+DELETE http://localhost:8080/filmes/1
+Content-Type: application/json
+
+### ================================
+### SALAS
+### ================================
+
+### GET todas as salas
+GET http://localhost:8080/salas
+Content-Type: application/json
+
+### GET sala por ID
+GET http://localhost:8080/salas/1
+Content-Type: application/json
+
+### POST criar nova sala
+POST http://localhost:8080/salas
+Content-Type: application/json
+
+{
+  "nome": "Sala IMAX",
+  "capacidade": 200,
+  "assentos": []
+}
+
+### PUT atualizar sala existente
+PUT http://localhost:8080/salas/1
+Content-Type: application/json
+
+{
+  "nome": "Sala VIP",
+  "capacidade": 120,
+  "assentos": []
+}
+
+### DELETE remover sala por ID
+DELETE http://localhost:8080/salas/1
 Content-Type: application/json
