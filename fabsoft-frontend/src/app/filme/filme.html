@@ -1,5 +1,14 @@
 <main class="container">
     <table class="table">
-        
+        <thead>
+            <tr>
+                <th>Titulo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let umFilme of listaFilme">
+                <td>{{ umFilme.titulo }}</td>
+            </tr>
+        </tbody>
     </table>
 </main>
