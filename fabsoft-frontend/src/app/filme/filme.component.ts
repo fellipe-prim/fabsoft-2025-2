@@ -26,3 +26,5 @@ export class FilmeComponent {
   }
 
 }
+
+export { Filme };
