@@ -16,11 +16,18 @@ public class Filme {
     private String titulo;
     private String sinopse;
     private int duracao;
+    private Integer minuto;   
     private String classificacao;
     private String genero;
     private String imagemURL;
 
 
+     public Integer getMinuto() {
+        return minuto;
+    }
+    public void setMinuto(Integer minuto) {
+        this.minuto = minuto;
+    }
     public int getDuracao() {
         return duracao;
     }

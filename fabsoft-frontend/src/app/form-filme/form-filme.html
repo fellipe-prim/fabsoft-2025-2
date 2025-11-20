@@ -1,1 +1,49 @@
-<p>form-filme works!</p>
+<main class="container">
+    <h2>Filme</h2>
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="form-group">
+                <label for="txtTitulo">Titulo</label>
+                <input type="text" [(ngModel)]="filme.titulo" class="form-control" id="txtTitulo">
+            </div>
+
+            <div class="form-group">
+                <label for="txtSinopse">Sinopse</label>
+                <input type="text" [(ngModel)]="filme.sinopse" class="form-control" id="txtSinopse">
+            </div>
+
+            <div class="form-group">
+                <label>Duração</label>
+                <div class="duracao-container" style="display: flex; gap: 10px;">
+                    
+                    <div class="time-input">
+                        <input type="number" id="horas" name="horas" min="0" max="10" placeholder="0"
+                            [(ngModel)]="filme.duracao" class="form-control" style="width: 80px; display: inline-block;">
+                        <span class="time-label"> horas </span>
+                    </div>
+
+                    <div class="time-input">
+                        <input type="number" id="minutos" name="minutos" min="0" max="59" placeholder="0" 
+                               class="form-control" style="width: 80px; display: inline-block;">
+                        <span class="time-label"> minutos</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="txtClassificacao">Classificação</label>
+                <select id="cars" name="cars" [(ngModel)]="filme.classificacao" class="form-control" id="txtClassificacao">
+                    <option value="livre">Livre</option>
+                    <option value="+14">+14 anos</option>
+                    <option value="+16">+16 anos</option>
+                    <option value="+18">+18 anos</option>
+                </select>
+            </div>
+            
+            <br>
+            <button (click)="salvar()" class="btn btn-primary">Salvar</button>
+        
+        </div> 
+    </div>
+</main>

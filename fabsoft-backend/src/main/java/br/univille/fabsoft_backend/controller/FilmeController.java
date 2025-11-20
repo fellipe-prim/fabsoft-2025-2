@@ -1,7 +1,7 @@
 package br.univille.fabsoft_backend.controller;
 
 import java.util.List;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +10,7 @@ import br.univille.fabsoft_backend.service.FilmeService;
 
 @RestController
 @RequestMapping("/api/v1/filme")
+@CrossOrigin(origins = "*") 
 public class FilmeController {
 
     private final FilmeService filmeService;

@@ -15,4 +15,8 @@ export class FilmeService {
     return this.http.get<Filme[]>(this.apiURL)
   }
 
+  saveFilme(filme:Filme){
+    return this.http.post(this.apiURL, filme)
+  }
+
 }

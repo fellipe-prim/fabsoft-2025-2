@@ -16,7 +16,7 @@
             <tr *ngFor="let umFilme of listaFilmes">
                 <td>{{ umFilme.titulo }}</td>
                 <td>{{ umFilme.sinopse }}</td>
-                <td>{{ umFilme.duracao }}</td>
+                <td>{{ umFilme.duracao }} Horas e {{ <umFilme class="minuto"></umFilme> || 0 }} Minutos</td>
                 <td>{{ umFilme.classificacao }}</td>
                 <td>{{ umFilme.genero }}</td>
                 <td>{{ umFilme.imagemURL }}</td>
