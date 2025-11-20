@@ -1,13 +1,25 @@
 <main class="container">
+    <h2>Filme</h2>
+    <button class="btn btn-primary" (click)="novo()">Novo</button>
     <table class="table">
         <thead>
             <tr>
                 <th>Titulo</th>
+                <th>Sinopse</th>
+                <th>Duração</th>
+                <th>Classificação</th>
+                <th>Genero</th>
+                <th>ImagemURL</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let umFilme of listaFilmes">
                 <td>{{ umFilme.titulo }}</td>
+                <td>{{ umFilme.sinopse }}</td>
+                <td>{{ umFilme.duracao }}</td>
+                <td>{{ umFilme.classificacao }}</td>
+                <td>{{ umFilme.genero }}</td>
+                <td>{{ umFilme.imagemURL }}</td>
             </tr>
         </tbody>
     </table>

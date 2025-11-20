@@ -9,7 +9,7 @@ import br.univille.fabsoft_backend.entity.Sala;
 import br.univille.fabsoft_backend.service.SalaService;
 
 @RestController
-@RequestMapping("/salas")
+@RequestMapping("/api/v1/sala")
 public class SalaController {
 
     private final SalaService salaService;

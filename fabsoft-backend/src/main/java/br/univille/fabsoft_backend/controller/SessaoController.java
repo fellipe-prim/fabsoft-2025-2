@@ -9,7 +9,7 @@ import br.univille.fabsoft_backend.entity.Sessao;
 import br.univille.fabsoft_backend.service.SessaoService;
 
 @RestController
-@RequestMapping("/sessoes")
+@RequestMapping("/api/v1/sessao")
 public class SessaoController {
 
     private final SessaoService sessaoService;

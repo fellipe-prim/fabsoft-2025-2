@@ -9,7 +9,7 @@ import br.univille.fabsoft_backend.entity.Filme;
 import br.univille.fabsoft_backend.service.FilmeService;
 
 @RestController
-@RequestMapping("/filme")
+@RequestMapping("/api/v1/filme")
 public class FilmeController {
 
     private final FilmeService filmeService;
