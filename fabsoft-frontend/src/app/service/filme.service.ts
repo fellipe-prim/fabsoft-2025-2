@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Filme } from '../model/filme';
 import { HttpClient } from '@angular/common/http';
+import { TmplAstHostElement } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,18 @@ export class FilmeService {
   }
 
   saveFilme(filme:Filme){
+    if(filme.id){
+      return this.http.put(this.apiURL + '/' + filme.id, filme)
+    }
     return this.http.post(this.apiURL, filme)
+  }
+
+  getFilmeById(id: string){
+    return this.http.get<Filme>(this.apiURL + '/' + id)
+  }
+
+  excluirFilme(id: string){
+    return this.http.delete<Filme>(this.apiURL + '/' + id)
   }
 
 }

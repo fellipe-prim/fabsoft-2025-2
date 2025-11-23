@@ -4,7 +4,7 @@ import { FilmeService } from '../service/filme.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 
 @Component({
   selector: 'app-form-filme',
@@ -18,8 +18,18 @@ export class FormFilme {
 
     constructor(
       private filmeService:FilmeService,
-      private  router:Router
-    ){}
+      private router:Router,
+      private activeRouter: ActivatedRoute
+    ){
+      let id = this.activeRouter.snapshot.paramMap.get('id')
+
+      if(id){
+        this.filmeService.getFilmeById(id)
+          .subscribe(res => {
+            this.filme = res
+          })
+      }
+    }
 
     salvar(){
       this.filmeService.saveFilme(this.filme)
@@ -28,4 +38,6 @@ export class FormFilme {
         })
       this
     }
+
+    
 }

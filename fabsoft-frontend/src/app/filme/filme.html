@@ -10,17 +10,43 @@
                 <th>Classificação</th>
                 <th>Genero</th>
                 <th>ImagemURL</th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let umFilme of listaFilmes">
                 <td>{{ umFilme.titulo }}</td>
                 <td>{{ umFilme.sinopse }}</td>
-<!--            <td>{{ umFilme.duracao }} Horas e {{ <umFilme class="minuto"></umFilme> || 0 }} Minutos</td> -->
+                <td>{{ umFilme.duracao }} Horas e {{ umFilme.minutos || 0 }} Minutos</td>
                 <td>{{ umFilme.classificacao }}</td>
                 <td>{{ umFilme.genero }}</td>
                 <td>{{ umFilme.imagemURL }}</td>
+                <td><button
+                        (click)="alterar(umFilme)"
+                    class="btn btn-secondary">Alterar</button>
+                    <button
+                        (click)="abrirConfirmacao(umFilme)"
+                    class="btn btn-danger">Excluir</button>
+                </td>
             </tr>
         </tbody>
     </table>
 </main>
+
+<div class="modal fade" #myModal tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Cliente</h5>
+            </div>
+            <div class="modal-body">
+                Confirma a Exclusão do Cliente??
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="fecharConfirmacao()">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="confirmarExclusao()">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>

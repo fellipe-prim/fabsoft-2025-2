@@ -3,6 +3,7 @@ export class Filme {
     titulo:string;
     sinopse:string;
     duracao:number;
+    minutos:number;
     classificacao:string;
     genero:string;
     imagemURL:string;

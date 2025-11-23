@@ -25,7 +25,7 @@
 
                     <div class="time-input">
                         <input type="number" id="minutos" name="minutos" min="0" max="59" placeholder="0" 
-                               class="form-control" style="width: 80px; display: inline-block;">
+                               [(ngModel)]="filme.minutos" class="form-control" style="width: 80px; display: inline-block;">
                         <span class="time-label"> minutos</span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="txtClassificacao">Classificação</label>
                 <select id="cars" name="cars" [(ngModel)]="filme.classificacao" class="form-control" id="txtClassificacao">
-                    <option value="livre">Livre</option>
+                    <option value="Livre">Livre</option>
                     <option value="+14">+14 anos</option>
                     <option value="+16">+16 anos</option>
                     <option value="+18">+18 anos</option>

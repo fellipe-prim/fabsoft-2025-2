@@ -6,5 +6,6 @@ import { FormFilme } from './form-filme/form-filme';
 export const routes: Routes = [
     {path: 'filme', component: FilmeComponent},
     {path: 'filme/novo', component: FormFilme},
+    {path: 'filme/alterar/:id', component: FormFilme},
     {path: 'sala', component: SalaComponent}
 ];
