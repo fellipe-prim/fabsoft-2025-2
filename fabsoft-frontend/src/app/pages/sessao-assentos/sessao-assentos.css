@@ -46,3 +46,18 @@
 .livre { background-color: #e0e0e0; }
 .selecionado { background-color: #28a745; }
 .ocupado { background-color: #dc3545; }
+
+.assentos-grid {
+    display: grid;
+    /* MUDOU AQUI: De 8 para 12 */
+    grid-template-columns: repeat(12, 1fr); 
+    gap: 8px; /* Diminui um pouco o espaço para caber */
+    max-width: 800px; /* Aumentei a largura total da sala */
+    margin: 0 auto;
+}
+
+/* Ajuste fino para o texto caber na bolinha */
+.assento span {
+    font-size: 0.7rem; 
+    font-weight: bold;
+}

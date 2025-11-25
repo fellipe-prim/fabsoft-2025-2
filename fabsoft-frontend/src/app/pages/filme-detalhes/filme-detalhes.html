@@ -1,6 +1,6 @@
 <div class="page-container py-5" *ngIf="filme"> <!-- Só mostra se o filme carregou -->
     <div class="container">
-        
+
         <!-- Botão Voltar -->
         <a routerLink="/" class="btn btn-link text-decoration-none text-secondary ps-0 mb-4">
             <i class="bi bi-arrow-left"></i> Voltar para Home
@@ -10,19 +10,25 @@
             <!-- Coluna da Esquerda: Pôster -->
             <div class="col-md-4 mb-4">
                 <div class="poster-wrapper shadow-sm rounded-4 overflow-hidden bg-light">
-                    <img [src]="filme.imagemURL || 'assets/placeholder.jpg'">
+                    <!-- Adicionei o '?' e a imagem placeholder -->
+                    <img [src]="filme.imagemURL || 'assets/placeholder.jpg'" 
+                         alt="{{ filme.titulo }}" 
+                         class="img-fluid w-100">
                 </div>
             </div>
 
             <!-- Coluna da Direita: Informações -->
             <div class="col-md-8">
                 <span class="badge bg-light text-dark border mb-3">{{ filme.genero }}</span>
-                
+
                 <h1 class="display-4 fw-bold text-dark mb-3">{{ filme.titulo }}</h1>
-                
-                <!-- Informações Técnicas (Placeholder por enquanto) -->
-                <div class="d-flex gap-4 text-muted small mb-4">
-                    <span><i class="bi bi-clock me-1"></i> 2h 15m</span>
+
+                <!-- Informações Técnicas -->
+                <div class="mb-4">
+                    <span class="text-muted">
+                        <i class="bi bi-clock me-1"></i>
+                        {{ filme.horas || 0 }}h {{ filme.minutos || 0 }}m
+                    </span>
                 </div>
 
                 <div class="mb-5">
@@ -32,40 +38,44 @@
                     </p>
                 </div>
 
-                <!-- Seção de Sessões (Futuro) -->
-                <div class="sessao-area p-4 rounded-3 bg-white border mt-4">
-    <h5 class="fw-bold mb-3">Horários Disponíveis</h5>
-    
-    <!-- Caso a lista esteja vazia -->
-    <p *ngIf="sessoes.length === 0" class="text-muted small">
-        Nenhuma sessão disponível para este filme no momento.
-    </p>
-    
-    <!-- Lista Real de Sessões -->
-    <div class="d-flex flex-wrap gap-2">
-        
-        <!-- O Loop acontece aqui: para cada sessão, cria um botão -->
-        <button *ngFor="let sessao of sessoes" 
-                [routerLink]="['/sessao', sessao.id]" 
-                class="btn btn-outline-dark px-4 py-2 text-center">
-            
-            <!-- Mostra a Hora (ex: 19:00) -->
-            <div class="fw-bold fs-5">{{ sessao.dataHora | date:'HH:mm' }}</div>
-            
-            <!-- Mostra a Data pequena (ex: 25/11) e Sala -->
-            <small class="text-secondary d-block" style="font-size: 0.7rem;">
-                {{ sessao.dataHora | date:'dd/MM' }} • Sala {{ sessao.sala?.id }}
-            </small>
+                <!-- Seção de Sessões (CORRIGIDA) -->
+                <!-- Fundo escuro para destacar -->
+                <div class="sessao-area p-4 rounded-3 border border-secondary mt-5" style="background-color: #1f1f1f;">
+                    <h5 class="fw-bold mb-3 text-white">Horários Disponíveis</h5>
 
-        </button>
+                    <!-- Mensagem caso não tenha sessões -->
+                    <p *ngIf="sessoes.length === 0" class="text-muted small">
+                        Nenhuma sessão disponível para este filme.
+                    </p>
 
-    </div>
-</div>
+                    <!-- Lista de Botões -->
+                    <div class="d-flex flex-wrap gap-2">
+                        
+                        <!-- Loop CORRETO (Sem aninhamento) -->
+                        <button *ngFor="let sessao of sessoes" 
+                                [routerLink]="['/sessao', sessao.id]"
+                                class="btn btn-outline-light px-4 py-2 text-center" 
+                                style="min-width: 100px;">
+
+                            <!-- Lógica do Horário: Array do Java [Ano, Mes, Dia, Hora, Minuto] -->
+                            <!-- Índice 3 = Hora, Índice 4 = Minuto -->
+                            <div class="fw-bold fs-5">
+                                {{ sessao.dataHora[3] | number:'2.0-0' }}:{{ sessao.dataHora[4] | number:'2.0-0' }}
+                            </div>
+
+                            <small class="text-white-50 d-block" style="font-size: 0.7rem;">
+                                Sala {{ sessao.sala.id }}
+                            </small>
+
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Tela de Carregando (Spinner) -->
 <div *ngIf="!filme" class="container py-5 text-center">
     <div class="spinner-border text-primary" role="status"></div>
     <p class="mt-3 text-muted">Carregando detalhes do filme...</p>

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   constructor(private filmeService: FilmeService) {}
 
     ngOnInit(): void {
-    this.filmeService.getFilme().subscribe({
+    this.filmeService.listar().subscribe({
       next: (dados) => {
         this.filmes = dados;
         console.log('Filmes encontrados:', dados);

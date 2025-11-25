@@ -1,0 +1,45 @@
+<div class="container-fluid" style="max-width: 800px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3">{{ filme.id ? 'Editar' : 'Novo' }} Filme</h2>
+        <a routerLink="/admin/filmes" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4">
+        <form (ngSubmit)="salvar()">
+            
+            <div class="row mb-3">
+                <div class="col-md-8">
+                    <label class="form-label fw-bold">Título</label>
+                    <input type="text" [(ngModel)]="filme.titulo" name="titulo" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Gênero</label>
+                    <input type="text" [(ngModel)]="filme.genero" name="genero" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Horas</label>
+                    <input type="number" [(ngModel)]="filme.horas" name="horas" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Minutos</label>
+                    <input type="number" [(ngModel)]="filme.minutos" name="minutos" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">URL da Imagem (Poster)</label>
+                <input type="text" [(ngModel)]="filme.imagemURL" name="imagemURL" class="form-control" placeholder="https://...">
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold">Sinopse</label>
+                <textarea [(ngModel)]="filme.sinopse" name="sinopse" rows="4" class="form-control"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success px-5 fw-bold">Salvar Filme</button>
+        </form>
+    </div>
+</div>

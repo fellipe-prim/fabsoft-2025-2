@@ -14,13 +14,15 @@
 
     <!-- GRID DE CADEIRAS -->
     <div class="assentos-grid">
-        <div *ngFor="let assento of assentosDummy" 
-             (click)="toggleAssento(assento)"
-             class="assento">
-             <i class="bi bi-person-fill"></i>
-             <span class="small d-block mt-1">{{ assento }}</span>
-        </div>
+    <div *ngFor="let assento of assentosDummy" 
+         (click)="toggleAssento(assento)"
+         class="assento"
+         [class.selecionado]="selecionados.has(assento)"> <!-- ISSO AQUI MUDA A COR -->
+         
+         <i class="bi bi-person-fill"></i>
+         <span class="small d-block mt-1">{{ assento }}</span>
     </div>
+</div>
 
     <!-- LEGENDA -->
     <div class="d-flex justify-content-center gap-4 mt-4 small">

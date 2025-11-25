@@ -35,4 +35,9 @@ export class SessaoService {
   buscarPorId(id: number): Observable<Sessao> {
     return this.http.get<Sessao>(`${this.apiUrl}/${id}`);
   }
+
+  listarTudo(): Observable<Sessao[]> {
+    return this.http.get<Sessao[]>(this.apiUrl);
+  }
+
 }

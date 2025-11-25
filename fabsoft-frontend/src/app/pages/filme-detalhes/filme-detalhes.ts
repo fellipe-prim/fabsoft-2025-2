@@ -8,19 +8,19 @@ import { SessaoService, Sessao } from '../../service/sessao'; // <--- Importante
 @Component({
   selector: 'app-filme-detalhes',
   standalone: true,
-  imports: [CommonModule, RouterModule], 
+  imports: [CommonModule, RouterModule],
   templateUrl: './filme-detalhes.html',
   styleUrls: ['./filme-detalhes.css']
 })
 export class FilmeDetalhesComponent implements OnInit {
 
   filme?: Filme;
-  
+
   // AQUI ESTAVA O PROBLEMA: Faltava declarar essa lista
-  sessoes: Sessao[] = []; 
+  sessoes: Sessao[] = [];
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private filmeService: FilmeService,
     private sessaoService: SessaoService // <--- Injetar o service de sessões
   ) { }
@@ -29,7 +29,7 @@ export class FilmeDetalhesComponent implements OnInit {
     // 1. Pega o ID da URL (ex: filme/1)
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    if(id) {
+    if (id) {
       // 2. Busca os detalhes do Filme
       this.filmeService.buscarPorId(id).subscribe({
         next: (dados) => {
@@ -48,4 +48,21 @@ export class FilmeDetalhesComponent implements OnInit {
       });
     }
   }
+
+  // Adicione este método lá no final, antes de fechar a classe }
+  formatarData(data: any): string {
+    // Se vier como array [2025, 11, 25, 19, 0], convertemos para string ISO
+    if (Array.isArray(data)) {
+      // Cuidado: Java conta meses de 1 a 12, Javascript de 0 a 11? 
+      // Na verdade, array do Java usually is [Year, Month, Day, Hour, Minute]
+      const [ano, mes, dia, hora, minuto] = data;
+      // Formatando manualmente para HH:mm
+      const horaString = hora.toString().padStart(2, '0');
+      const minString = minuto.toString().padStart(2, '0');
+      return `${horaString}:${minString}`;
+    }
+    // Se for string normal, deixamos o Pipe do HTML cuidar ou retornamos direto
+    return data;
+  }
+
 }

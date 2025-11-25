@@ -1,39 +1,56 @@
 import { Injectable } from '@angular/core';
-import { Filme } from '../model/filme';
 import { HttpClient } from '@angular/common/http';
-import { TmplAstHostElement } from '@angular/compiler';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
+import { Filme } from '../model/filme'; // Verifique se o caminho da pasta é 'models' ou 'model'
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class FilmeService {
   
-  apiURL = 'http://localhost:8080/api/v1/filme'
-  constructor(private http:HttpClient){}
+  // Verifique se a porta é 8080 ou outra
+  private apiURL = 'http://localhost:8080/api/v1/filme';
 
-  getFilme(){
-    return this.http.get<Filme[]>(this.apiURL)
+  private atualizador = new Subject<void>();
+
+
+  constructor(private http: HttpClient) {}
+
+  // =================================================
+  // MÉTODOS PADRONIZADOS (Usados nos componentes)
+  // =================================================
+
+    get onAtualizacao() {
+    return this.atualizador.asObservable();
   }
 
-  saveFilme(filme:Filme){
-    if(filme.id){
-      return this.http.put(this.apiURL + '/' + filme.id, filme)
-    }
-    return this.http.post(this.apiURL, filme)
+
+  // 1. LISTAR (GET)
+  listar(): Observable<Filme[]> {
+    return this.http.get<Filme[]>(this.apiURL);
   }
 
-  getFilmeById(id: string){
-    return this.http.get<Filme>(this.apiURL + '/' + id)
-  }
-
-  excluirFilme(id: string){
-    return this.http.delete<Filme>(this.apiURL + '/' + id)
-  }
-
-    buscarPorId(id: number): Observable<Filme> {
+  // 2. BUSCAR UM (GET by ID)
+  buscarPorId(id: number): Observable<Filme> {
     return this.http.get<Filme>(`${this.apiURL}/${id}`);
   }
 
+  // 3. SALVAR (POST ou PUT)
+  // Serve tanto para criar quanto para editar
+  salvar(filme: Filme): Observable<Filme> {
+    // 3. O operador 'tap' executa algo sem atrapalhar o fluxo
+    return (filme.id 
+      ? this.http.put<Filme>(`${this.apiURL}/${filme.id}`, filme)
+      : this.http.post<Filme>(this.apiURL, filme)
+    ).pipe(
+      tap(() => this.atualizador.next())
+    );
+  }
+
+  // 4. DELETAR (DELETE)
+  deletar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiURL}/${id}`).pipe(
+      tap(() => this.atualizador.next()) // <--- AVISA QUE MUDOU!
+    );
+  }
 }

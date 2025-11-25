@@ -14,26 +14,43 @@ export class SessaoAssentosComponent implements OnInit {
 
   sessao?: Sessao;
   assentosDummy: string[] = [];
+  selecionados: Set<string> = new Set(); 
+
 
   constructor(
     private route: ActivatedRoute,
     private sessaoService: SessaoService
   ) {}
 
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+ngOnInit(): void {
+    // ... código de buscar a sessão ...
 
-    this.sessaoService.listarPorFilme(1).subscribe(lista => {
-         this.sessao = lista.find(s => s.id === id); 
-    });
+    // --- NOVA LÓGICA DE ASSENTOS ---
+    this.assentosDummy = []; // Limpa antes de gerar
+    const totalAssentos = 60; // Ex: 5 fileiras de 12 (5 * 12 = 60)
+    const colunasPorFileira = 12;
 
-    // Gera cadeiras A1 até A40
-    for(let i=1; i<=40; i++) {
-        this.assentosDummy.push('A' + i);
+    for (let i = 0; i < totalAssentos; i++) {
+        const linhaIndex = Math.floor(i / colunasPorFileira); // 0 = A, 1 = B, 2 = C...
+        const numero = (i % colunasPorFileira) + 1; // 1 até 12
+
+        // Código ASCII: 65 é 'A', 66 é 'B', etc.
+        const letra = String.fromCharCode(65 + linhaIndex); 
+
+        this.assentosDummy.push(letra + numero); // Resultado: A1, A2... A12, B1...
     }
-  }
+}
 
   toggleAssento(assento: string) {
-    console.log('Clicou no assento', assento);
+    // Se já está na lista, remove (desmarcar)
+    if (this.selecionados.has(assento)) {
+      this.selecionados.delete(assento);
+    } else {
+      // Se não está, adiciona (marcar)
+      this.selecionados.add(assento);
+    }
+    
+    console.log('Selecionados:', this.selecionados); // Para você ver no console
   }
+
 }
