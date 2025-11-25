@@ -1,0 +1,39 @@
+:host {
+    background-color: #fafafa; /* Mantendo o fundo off-white da Home */
+    min-height: 100vh;
+    display: block;
+}
+
+.tracking-wide {
+    letter-spacing: 1.5px;
+}
+
+.poster-wrapper img {
+    object-fit: cover;
+    /* Removemos altura fixa para adaptar ao tamanho da coluna */
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+/* Área de Sessão para destacar sutilmente */
+.sessao-area {
+    border-color: #e0e0e0 !important;
+}
+
+.poster-wrapper {
+    background-color: transparent; /* ou #f0f0f0 se quiser um fundo cinza */
+    display: flex;
+    justify-content: center; /* Centraliza a imagem se ela for estreita */
+    align-items: center;
+}
+
+/* Estilo da Imagem em si */
+.poster-wrapper img {
+    object-fit: contain; /* <--- O SEGRED0: Garante que a imagem apareça inteira */
+    width: 100%;
+    height: auto;        /* Deixa a altura se ajustar naturalmente */
+    max-height: 600px;   /* Limita para não ficar gigante em telas grandes */
+    border-radius: 8px;
+}

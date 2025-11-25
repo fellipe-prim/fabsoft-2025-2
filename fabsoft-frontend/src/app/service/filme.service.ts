@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Filme } from '../model/filme';
 import { HttpClient } from '@angular/common/http';
 import { TmplAstHostElement } from '@angular/compiler';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,10 @@ export class FilmeService {
 
   excluirFilme(id: string){
     return this.http.delete<Filme>(this.apiURL + '/' + id)
+  }
+
+    buscarPorId(id: number): Observable<Filme> {
+    return this.http.get<Filme>(`${this.apiURL}/${id}`);
   }
 
 }

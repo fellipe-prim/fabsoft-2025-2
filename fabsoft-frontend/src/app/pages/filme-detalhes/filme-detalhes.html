@@ -1,0 +1,55 @@
+<div class="page-container py-5" *ngIf="filme"> <!-- Só mostra se o filme carregou -->
+    <div class="container">
+        
+        <!-- Botão Voltar -->
+        <a routerLink="/" class="btn btn-link text-decoration-none text-secondary ps-0 mb-4">
+            <i class="bi bi-arrow-left"></i> Voltar para Home
+        </a>
+
+        <div class="row gx-5">
+            <!-- Coluna da Esquerda: Pôster -->
+            <div class="col-md-4 mb-4">
+                <div class="poster-wrapper shadow-sm rounded-4 overflow-hidden bg-light">
+                    <img [src]="filme?.imagemURL || 'assets/placeholder.jpg'">
+                </div>
+            </div>
+
+            <!-- Coluna da Direita: Informações -->
+            <div class="col-md-8">
+                <span class="badge bg-light text-dark border mb-3">{{ filme?.genero }}</span>
+                
+                <h1 class="display-4 fw-bold text-dark mb-3">{{ filme?.titulo }}</h1>
+                
+                <!-- Informações Técnicas (Placeholder por enquanto) -->
+                <div class="d-flex gap-4 text-muted small mb-4">
+                    <span><i class="bi bi-clock me-1"></i> 2h 15m</span>
+                </div>
+
+                <div class="mb-5">
+                    <h5 class="text-uppercase text-secondary small fw-bold tracking-wide mb-3">Sinopse</h5>
+                    <p class="lead fs-6 text-dark opacity-75" style="line-height: 1.8;">
+                        {{ filme?.sinopse }}
+                    </p>
+                </div>
+
+                <!-- Seção de Sessões (Futuro) -->
+                <div class="sessao-area p-4 rounded-3 bg-white border">
+                    <h5 class="fw-bold mb-3">Horários Disponíveis</h5>
+                    <p class="text-muted small">Implementaremos as sessões no próximo passo do Backend.</p>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-dark disabled">14:00</button>
+                        <button class="btn btn-outline-dark disabled">16:30</button>
+                        <button class="btn btn-outline-dark disabled">19:00</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!filme" class="container py-5 text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-3 text-muted">Carregando detalhes do filme...</p>
+    <a routerLink="/" class="btn btn-sm btn-outline-secondary mt-2">Voltar</a>
+</div>

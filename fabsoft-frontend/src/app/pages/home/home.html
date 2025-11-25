@@ -1,0 +1,79 @@
+<!-- Navbar Minimalista -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-3 sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold tracking-wide" href="#">CINE<span class="text-secondary fw-normal">FAB</span></a>
+
+        <!-- Menu Simples -->
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav gap-4">
+                <li class="nav-item"><a href="#" class="nav-link text-dark active">Filmes</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-secondary">Cinemas</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-secondary">Eventos</a></li>
+            </ul>
+        </div>
+
+        <button class="btn btn-outline-dark rounded-pill px-4 btn-sm">Entrar</button>
+    </div>
+</nav>
+
+<div class="main-content py-5">
+    <div class="container">
+
+        <!-- Header da Página (Texto puro, sem imagens de fundo) -->
+        <div class="row mb-5 align-items-end">
+            <div class="col-md-8">
+                <p class="text-uppercase text-secondary small fw-bold mb-2 tracking-wide">Programação</p>
+                <h1 class="display-5 fw-bold text-dark">Em Cartaz</h1>
+                <p class="text-muted mt-2">Escolha seu filme e viva a experiência.</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <!-- Filtro Simples -->
+                <div class="input-group border rounded-pill overflow-hidden bg-light">
+                    <span class="input-group-text bg-transparent border-0 ps-3"><i
+                            class="bi bi-search text-muted"></i></span>
+                    <input type="text" class="form-control bg-transparent border-0 shadow-none"
+                        placeholder="Buscar filme...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid de Filmes -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5">
+
+            <div class="col" *ngFor="let filme of filmes">
+                <div class="card h-100 border-0 bg-transparent movie-item">
+                    <!-- Imagem Clean (com borda arredondada suave) -->
+                    <div class="img-wrapper rounded-4 overflow-hidden mb-3 position-relative shadow-sm">
+                        <img [src]="filme.imagemURL || 'assets/placeholder.jpg'" class="img-fluid w-100"
+                            alt="{{ filme.titulo }}" style="height: 380px; object-fit: cover;">
+
+                        <!-- Botão Hover Minimalista -->
+                        <div class="hover-action">
+                            <button class="btn btn-light rounded-circle shadow p-3">
+                                <i class="bi bi-arrow-right text-dark fs-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-between align-items-start mb-1">
+                            <h5 class="card-title fw-bold text-dark mb-0 fs-5 text-truncate pe-2"
+                                title="{{ filme.titulo }}">
+                                {{ filme.titulo }}
+                            </h5>
+                        </div>
+                        <p class="card-text text-secondary small mb-3">{{ filme.genero }}</p>
+
+                        <!-- Botão de Ação Discreto -->
+                        <a [routerLink]="['/filme', filme.id]"
+                            class="btn btn-outline-dark w-100 rounded-3 py-2 text-uppercase small fw-bold tracking-wide btn-buy">
+                            Ingressos
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

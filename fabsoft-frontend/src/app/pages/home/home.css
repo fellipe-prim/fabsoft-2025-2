@@ -1,0 +1,88 @@
+/* Configuração Geral */
+:host {
+    background-color: #fafafa; /* Um branco 'sujo' (off-white) muito suave */
+    display: block;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Espaçamento de Letras (Tracking) para elegância */
+.tracking-wide {
+    letter-spacing: 1.5px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px); /* Efeito vidro fosco se rolar a página */
+}
+
+.nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: #000 !important;
+}
+
+/* Input de Busca */
+.form-control::placeholder {
+    font-size: 0.9rem;
+    color: #adb5bd;
+}
+
+/* Card do Filme */
+.img-wrapper {
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+    cursor: pointer;
+    background-color: #e9ecef; /* Cor de fundo enquanto carrega a imagem */
+}
+
+/* Efeito ao passar o mouse na IMAGEM */
+.movie-item:hover .img-wrapper {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important; /* Sombra suave e difusa */
+}
+
+/* Botão Flutuante (Seta) dentro da imagem */
+.hover-action {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.03); /* Leve escurecimento */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.movie-item:hover .hover-action {
+    opacity: 1;
+}
+
+.hover-action .btn {
+    transform: scale(0.8);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.movie-item:hover .hover-action .btn {
+    transform: scale(1);
+}
+
+/* Botão "Ingressos" embaixo */
+.btn-buy {
+    border-color: #e0e0e0;
+    color: #495057;
+    transition: all 0.2s ease;
+}
+
+.btn-buy:hover {
+    background-color: #212529;
+    color: #fff;
+    border-color: #212529;
+}
