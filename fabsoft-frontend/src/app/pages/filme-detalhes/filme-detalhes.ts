@@ -1,41 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router'; // Para pegar o ID da URL
+import { CommonModule } from '@angular/common'; // Necessário para o *ngIf e *ngFor
+import { ActivatedRoute, RouterModule } from '@angular/router'; // Necessário para pegar o ID e usar routerLink
 import { FilmeService } from '../../service/filme.service';
 import { Filme } from '../../model/filme';
-import { CommonModule } from '@angular/common';
-
-
+import { SessaoService, Sessao } from '../../service/sessao'; // <--- Importante: O Service e a Interface
 
 @Component({
   selector: 'app-filme-detalhes',
   standalone: true,
+  imports: [CommonModule, RouterModule], 
   templateUrl: './filme-detalhes.html',
-  imports: [CommonModule, RouterModule],
   styleUrls: ['./filme-detalhes.css']
 })
 export class FilmeDetalhesComponent implements OnInit {
 
-  filme?: Filme; // Pode ser undefined enquanto carrega
+  filme?: Filme;
+  
+  // AQUI ESTAVA O PROBLEMA: Faltava declarar essa lista
+  sessoes: Sessao[] = []; 
 
   constructor(
     private route: ActivatedRoute, 
-    private filmeService: FilmeService
+    private filmeService: FilmeService,
+    private sessaoService: SessaoService // <--- Injetar o service de sessões
   ) { }
 
   ngOnInit(): void {
+    // 1. Pega o ID da URL (ex: filme/1)
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    
-    console.log('ID capturado da URL:', id); // <--- Vamos investigar isso
 
     if(id) {
+      // 2. Busca os detalhes do Filme
       this.filmeService.buscarPorId(id).subscribe({
         next: (dados) => {
-          console.log('Filme retornado do Backend:', dados); // <--- E isso
           this.filme = dados;
         },
-        error: (erro) => {
-          console.error('Erro ao buscar filme:', erro);
-        }
+        error: (err) => console.error('Erro ao buscar filme', err)
+      });
+
+      // 3. Busca as Sessões disponíveis para esse filme
+      this.sessaoService.listarPorFilme(id).subscribe({
+        next: (dados) => {
+          this.sessoes = dados; // <--- Guarda os dados na variável que o HTML quer ler
+          console.log('Sessões carregadas:', dados);
+        },
+        error: (err) => console.error('Erro ao buscar sessões', err)
       });
     }
   }

@@ -9,4 +9,5 @@ public interface SessaoService {
     Sessao save(Sessao sessao);
     Sessao update(Long id, Sessao sessao);
     void delete(Long id);
+    List<Sessao> getByFilmeId(Long filmeId);
 }

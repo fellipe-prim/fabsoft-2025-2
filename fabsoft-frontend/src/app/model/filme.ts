@@ -2,7 +2,7 @@ export class Filme {
     id:number;
     titulo:string;
     sinopse:string;
-    duracao:number;
+    horas:number;
     minutos:number;
     classificacao:string;
     genero:string;

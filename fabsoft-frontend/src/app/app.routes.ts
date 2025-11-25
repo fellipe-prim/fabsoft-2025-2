@@ -4,6 +4,7 @@ import { SalaComponent } from './sala/sala.component';
 import { FormFilme } from './form-filme/form-filme';
 import { HomeComponent } from './pages/home/home.component';
 import { FilmeDetalhesComponent } from './pages/filme-detalhes/filme-detalhes';
+import { SessaoAssentosComponent } from './pages/sessao-assentos/sessao-assentos';
 
 export const routes: Routes = [
     {path: 'filme', component: FilmeComponent},
@@ -11,5 +12,6 @@ export const routes: Routes = [
     {path: 'filme/alterar/:id', component: FormFilme},
     {path: 'sala', component: SalaComponent},
     { path: '', component: HomeComponent },
-    { path: 'filme/:id', component: FilmeDetalhesComponent }
+    { path: 'filme/:id', component: FilmeDetalhesComponent },
+    { path: 'sessao/:id', component: SessaoAssentosComponent },
 ];

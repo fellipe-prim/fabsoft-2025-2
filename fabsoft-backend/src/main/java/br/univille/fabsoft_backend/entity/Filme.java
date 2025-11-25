@@ -15,25 +15,17 @@ public class Filme {
     private long id;
     private String titulo;
     private String sinopse;
-    private int duracao;
-    private int minutos;
-    private Integer minuto;   
+    private int horas;
+    private int minutos;   
     private String classificacao;
     private String genero;
     private String imagemURL;
 
-
-     public Integer getMinuto() {
-        return minuto;
+    public int getHoras() {
+        return horas;
     }
-    public void setMinuto(Integer minuto) {
-        this.minuto = minuto;
-    }
-    public int getDuracao() {
-        return duracao;
-    }
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
+    public void setHoras(int horas) {
+        this.horas = horas;
     }
     public String getClassificacao() {
         return classificacao;

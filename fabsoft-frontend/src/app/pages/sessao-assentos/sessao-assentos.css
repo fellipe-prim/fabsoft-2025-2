@@ -1,0 +1,48 @@
+/* Efeito de Tela de Cinema */
+.screen {
+    background: linear-gradient(to bottom, #ddd, #fff);
+    height: 60px;
+    width: 80%;
+    margin: 0 auto;
+    transform: perspective(300px) rotateX(-5deg);
+    box-shadow: 0 15px 20px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-weight: bold;
+    letter-spacing: 5px;
+    border-radius: 8px;
+}
+
+.assentos-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); /* 8 cadeiras por linha */
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.assento {
+    background-color: #e0e0e0; /* Cinza (Livre) */
+    height: 50px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: #fff;
+}
+
+.assento:hover {
+    background-color: #bbb;
+    transform: scale(1.1);
+}
+
+/* Legendas */
+.legenda { width: 20px; height: 20px; border-radius: 4px; margin-right: 5px; }
+.livre { background-color: #e0e0e0; }
+.selecionado { background-color: #28a745; }
+.ocupado { background-color: #dc3545; }

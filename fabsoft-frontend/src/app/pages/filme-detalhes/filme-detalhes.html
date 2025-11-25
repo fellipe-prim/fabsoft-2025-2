@@ -10,15 +10,15 @@
             <!-- Coluna da Esquerda: Pôster -->
             <div class="col-md-4 mb-4">
                 <div class="poster-wrapper shadow-sm rounded-4 overflow-hidden bg-light">
-                    <img [src]="filme?.imagemURL || 'assets/placeholder.jpg'">
+                    <img [src]="filme.imagemURL || 'assets/placeholder.jpg'">
                 </div>
             </div>
 
             <!-- Coluna da Direita: Informações -->
             <div class="col-md-8">
-                <span class="badge bg-light text-dark border mb-3">{{ filme?.genero }}</span>
+                <span class="badge bg-light text-dark border mb-3">{{ filme.genero }}</span>
                 
-                <h1 class="display-4 fw-bold text-dark mb-3">{{ filme?.titulo }}</h1>
+                <h1 class="display-4 fw-bold text-dark mb-3">{{ filme.titulo }}</h1>
                 
                 <!-- Informações Técnicas (Placeholder por enquanto) -->
                 <div class="d-flex gap-4 text-muted small mb-4">
@@ -28,21 +28,39 @@
                 <div class="mb-5">
                     <h5 class="text-uppercase text-secondary small fw-bold tracking-wide mb-3">Sinopse</h5>
                     <p class="lead fs-6 text-dark opacity-75" style="line-height: 1.8;">
-                        {{ filme?.sinopse }}
+                        {{ filme.sinopse }}
                     </p>
                 </div>
 
                 <!-- Seção de Sessões (Futuro) -->
-                <div class="sessao-area p-4 rounded-3 bg-white border">
-                    <h5 class="fw-bold mb-3">Horários Disponíveis</h5>
-                    <p class="text-muted small">Implementaremos as sessões no próximo passo do Backend.</p>
-                    
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-outline-dark disabled">14:00</button>
-                        <button class="btn btn-outline-dark disabled">16:30</button>
-                        <button class="btn btn-outline-dark disabled">19:00</button>
-                    </div>
-                </div>
+                <div class="sessao-area p-4 rounded-3 bg-white border mt-4">
+    <h5 class="fw-bold mb-3">Horários Disponíveis</h5>
+    
+    <!-- Caso a lista esteja vazia -->
+    <p *ngIf="sessoes.length === 0" class="text-muted small">
+        Nenhuma sessão disponível para este filme no momento.
+    </p>
+    
+    <!-- Lista Real de Sessões -->
+    <div class="d-flex flex-wrap gap-2">
+        
+        <!-- O Loop acontece aqui: para cada sessão, cria um botão -->
+        <button *ngFor="let sessao of sessoes" 
+                [routerLink]="['/sessao', sessao.id]" 
+                class="btn btn-outline-dark px-4 py-2 text-center">
+            
+            <!-- Mostra a Hora (ex: 19:00) -->
+            <div class="fw-bold fs-5">{{ sessao.dataHora | date:'HH:mm' }}</div>
+            
+            <!-- Mostra a Data pequena (ex: 25/11) e Sala -->
+            <small class="text-secondary d-block" style="font-size: 0.7rem;">
+                {{ sessao.dataHora | date:'dd/MM' }} • Sala {{ sessao.sala?.id }}
+            </small>
+
+        </button>
+
+    </div>
+</div>
             </div>
         </div>
     </div>

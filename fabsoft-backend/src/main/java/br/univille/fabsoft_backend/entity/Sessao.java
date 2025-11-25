@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -15,9 +16,9 @@ public class Sessao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dataHora;
-    @OneToOne
+    @ManyToOne
     private Sala sala;
-    @OneToOne
+    @ManyToOne
     private Filme filme;
 
     public Long getId() {

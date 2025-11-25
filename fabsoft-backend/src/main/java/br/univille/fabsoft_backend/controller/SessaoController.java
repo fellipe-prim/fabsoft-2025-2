@@ -1,7 +1,7 @@
 package br.univille.fabsoft_backend.controller;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,5 +52,11 @@ public class SessaoController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         sessaoService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    
+        @GetMapping("/filme/{filmeId}")
+    public ResponseEntity<List<Sessao>> getByFilmeId(@PathVariable Long filmeId) {
+        List<Sessao> lista = sessaoService.getByFilmeId(filmeId);
+        return ResponseEntity.ok(lista);
     }
 }

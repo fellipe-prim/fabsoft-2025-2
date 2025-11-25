@@ -17,7 +17,7 @@ public class Sala {
     private Long id;
     private String nome;
     private int capacidade;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL) 
     private List<Assento> assentos;
     
     public Long getId() {

@@ -41,7 +41,7 @@ public class FilmeServiceImpl implements FilmeService {
             Filme novo = existente.get();
             novo.setTitulo(filme.getTitulo());
             novo.setSinopse(filme.getSinopse());
-            novo.setDuracao(filme.getDuracao());
+            novo.setHoras(filme.getHoras());
             novo.setClassificacao(filme.getClassificacao());
             novo.setGenero(filme.getGenero());
             novo.setImagemURL(filme.getImagemURL());

@@ -36,7 +36,7 @@ public class SessaoServiceImpl implements SessaoService {
     @Override
     public Sessao update(Long id, Sessao sessao) {
         Optional<Sessao> sessaoExistente = sessaoRepository.findById(id);
-        if(sessaoExistente.isPresent()) {
+        if (sessaoExistente.isPresent()) {
             Sessao novaSessao = sessaoExistente.get();
             novaSessao.setDataHora(sessao.getDataHora());
             novaSessao.setSala(sessao.getSala());
@@ -49,5 +49,10 @@ public class SessaoServiceImpl implements SessaoService {
     @Override
     public void delete(Long id) {
         sessaoRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Sessao> getByFilmeId(Long filmeId) {
+        return sessaoRepository.findByFilmeId(filmeId);
     }
 }
