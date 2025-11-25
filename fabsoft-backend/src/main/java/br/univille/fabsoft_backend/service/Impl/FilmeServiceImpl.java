@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import br.univille.fabsoft_backend.entity.Filme;
+import br.univille.fabsoft_backend.entity.Usuario;
 import br.univille.fabsoft_backend.repository.FilmeRepository;
 import br.univille.fabsoft_backend.service.FilmeService;
 

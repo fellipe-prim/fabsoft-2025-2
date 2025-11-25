@@ -16,6 +16,7 @@ public class Filme {
     private String titulo;
     private String sinopse;
     private int duracao;
+    private int minutos;
     private Integer minuto;   
     private String classificacao;
     private String genero;
@@ -69,5 +70,11 @@ public class Filme {
     }
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
+    }
+        public int getMinutos() {
+        return minutos;
+    }
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
     }
 }
