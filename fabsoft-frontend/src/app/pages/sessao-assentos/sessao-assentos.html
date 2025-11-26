@@ -1,28 +1,30 @@
 <div class="container py-5 text-center">
-    
+    <!-- Cabeçalho -->
     <h2 class="mb-4">Selecione seus Assentos</h2>
-    
     <p class="text-muted" *ngIf="sessao">
-        <!-- O '?' evita erro se os dados ainda não carregaram -->
-        Horário: <strong>{{ sessao.dataHora | date:'HH:mm' }}</strong>
+        Filme: <strong>{{ sessao.filme.titulo }}</strong> | 
+        Horário: 
+        <span *ngIf="sessao.dataHora.length">
+            {{ sessao.dataHora[3] | number:'2.0' }}:{{ sessao.dataHora[4] | number:'2.0' }}
+        </span>
     </p>
 
-    <!-- TELA DO CINEMA -->
     <div class="screen-container mb-5">
         <div class="screen">TELA</div>
     </div>
 
-    <!-- GRID DE CADEIRAS -->
+    <!-- GRID DE CADEIRAS REAIS -->
     <div class="assentos-grid">
-    <div *ngFor="let assento of assentosDummy" 
-         (click)="toggleAssento(assento)"
-         class="assento"
-         [class.selecionado]="selecionados.has(assento)"> <!-- ISSO AQUI MUDA A COR -->
-         
-         <i class="bi bi-person-fill"></i>
-         <span class="small d-block mt-1">{{ assento }}</span>
+        <div *ngFor="let ingresso of listaIngressos" 
+             (click)="toggleAssento(ingresso)"
+             class="assento"
+             [class.selecionado]="selecionados.has(ingresso)"
+             [class.ocupado]="ingresso.status === 'VENDIDO'"> <!-- Usa o status do banco! -->
+             
+             <i class="bi bi-person-fill"></i>
+             <span class="small d-block mt-1">{{ ingresso.numeroAssento }}</span>
+        </div>
     </div>
-</div>
 
     <!-- LEGENDA -->
     <div class="d-flex justify-content-center gap-4 mt-4 small">
@@ -31,5 +33,7 @@
         <div class="d-flex align-items-center"><div class="legenda ocupado"></div> Ocupado</div>
     </div>
 
-    <button class="btn btn-success btn-lg mt-5 px-5">Finalizar Compra</button>
+    <button (click)="finalizarCompra()" class="btn btn-success btn-lg mt-5 px-5">
+        Finalizar Compra ({{ selecionados.size }} itens)
+    </button>
 </div>

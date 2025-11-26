@@ -9,4 +9,5 @@ public interface SalaService {
     Sala save(Sala sala);
     Sala update(Long id, Sala sala);
     void delete(Long id);
+    Sala getByNome(String nome);
 }

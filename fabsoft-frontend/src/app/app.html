@@ -10,16 +10,46 @@
         <!-- Menu Central -->
         <div class="d-none d-md-block ms-auto me-4">
             <ul class="navbar-nav gap-4">
-                <li class="nav-item"><a routerLink="/" class="nav-link text-dark fw-bold">Filmes</a></li>
-                <li class="nav-item"><a href="#" class="nav-link text-secondary">Cinemas</a></li>
-                <li class="nav-item"><a href="#" class="nav-link text-secondary">Eventos</a></li>
+                <!-- Link Filmes -->
+                <li class="nav-item">
+                    <a routerLink="/" class="nav-link text-dark fw-bold">Filmes</a>
+                </li>
+                
+                <!-- Link Meus Ingressos (Novo) -->
+                <!-- Chama a função no TS que decide se vai pra tela de ingressos ou login -->
+                <li class="nav-item">
+                    <a (click)="irParaIngressos()" class="nav-link text-secondary fw-bold" style="cursor: pointer;">
+                        Meus Ingressos
+                    </a>
+                </li>
             </ul>
         </div>
 
-        <!-- Botão Entrar (Clique vai para Login) -->
-        <a routerLink="/login" class="btn btn-outline-dark rounded-pill px-4 btn-sm fw-bold">
+        <!-- ÁREA DE LOGIN / PERFIL -->
+        
+        <!-- CASO 1: NÃO ESTÁ LOGADO (Mostra Botão Entrar) -->
+        <a *ngIf="!usuarioLogado" routerLink="/login" class="btn btn-outline-dark rounded-pill px-4 btn-sm fw-bold">
             Entrar
         </a>
+
+        <!-- CASO 2: ESTÁ LOGADO (Mostra Olá e Sair) -->
+        <div *ngIf="usuarioLogado" class="d-flex align-items-center gap-3">
+            
+            <!-- Saudação -->
+            <span class="fw-bold text-dark">
+                Olá, 
+                <!-- Lógica Ternária: Se for ADMIN escreve 'ADM', senão escreve o NOME -->
+                <span class="text-primary">
+                    {{ usuarioLogado.tipo === 'ADMIN' ? 'ADM' : usuarioLogado.nome }}
+                </span>
+            </span>
+
+            <!-- Botão Sair (Ícone de porta/seta) -->
+            <button (click)="sair()" class="btn btn-link text-secondary text-decoration-none p-0 d-flex align-items-center" title="Sair">
+                <i class="bi bi-box-arrow-right fs-5"></i>
+            </button>
+        </div>
+
     </div>
 </nav>
 

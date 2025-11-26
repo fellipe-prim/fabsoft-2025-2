@@ -1,21 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Sala } from '../model/sala';
 import { HttpClient } from '@angular/common/http';
-import { TmplAstHostElement } from '@angular/compiler';
+import { Observable, Subject, tap } from 'rxjs';
+import { Sala } from '../model/sala';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-
 export class SalaService {
   
-  apiURL = 'http://localhost:8080/api/v1/sala'
-  
-  constructor(private http:HttpClient){}
+  private apiUrl = 'http://localhost:8080/api/v1/sala';
 
-  getSala(){
-    return this.http.get<Sala[]>(this.apiURL)
+  private atualizador = new Subject<void>();
+
+  constructor(private http: HttpClient) { }
+
+  get onAtualizacao() {
+    return this.atualizador.asObservable();
   }
 
+  listar(): Observable<Sala[]> {
+    return this.http.get<Sala[]>(this.apiUrl);
+  }
 
+  buscarPorId(id: number): Observable<Sala> {
+    return this.http.get<Sala>(`${this.apiUrl}/${id}`);
+  }
+
+  salvar(sala: Sala): Observable<Sala> {
+    // Se for novo, inicializa assentos como vazio para não dar erro no Java
+    if (!sala.assentos) { sala.assentos = []; }
+
+    return (sala.id 
+      ? this.http.put<Sala>(`${this.apiUrl}/${sala.id}`, sala)
+      : this.http.post<Sala>(this.apiUrl, sala)
+    ).pipe(tap(() => this.atualizador.next()));
+  }
+
+  deletar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => this.atualizador.next())
+    );
+  }
 }

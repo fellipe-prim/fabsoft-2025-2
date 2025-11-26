@@ -1,0 +1,49 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3">Gerenciar Sessões</h2>
+        <a routerLink="/admin/sessoes/novo" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Nova Sessão
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Data/Hora</th>
+                        <th>Filme</th>
+                        <th>Sala</th>
+                        <th class="text-end pe-4">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let sessao of sessoes">
+                        <!-- Tratamento de Data Array ou String -->
+                        <td class="ps-4 fw-bold">
+                            <span *ngIf="sessao.dataHora.length; else dataString">
+                                {{ sessao.dataHora[2] }}/{{ sessao.dataHora[1] }} - 
+                                {{ sessao.dataHora[3] | number:'2.0' }}:{{ sessao.dataHora[4] | number:'2.0' }}
+                            </span>
+                            <ng-template #dataString>
+                                {{ sessao.dataHora | date:'dd/MM - HH:mm' }}
+                            </ng-template>
+                        </td>
+                        
+                        <td>{{ sessao.filme.titulo }}</td>
+                        <td>
+                            <span class="badge bg-dark">{{ sessao.sala.nome }}</span>
+                        </td>
+                        
+                        <td class="text-end pe-4">
+                            <!-- Edição de sessão é complexa (datas), vamos focar em Deletar/Criar -->
+                            <button (click)="deletar(sessao)" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container-fluid" style="max-width: 600px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3">Nova Sessão</h2>
+        <a routerLink="/admin/sessoes" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4">
+        <form (ngSubmit)="salvar()">
+            
+            <!-- Select de FILME -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Filme</label>
+                <select class="form-select" [(ngModel)]="sessao.filme.id" name="filmeId" required>
+                    <option [value]="0" disabled>Selecione um filme...</option>
+                    <option *ngFor="let f of listaFilmes" [value]="f.id">
+                        {{ f.titulo }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Select de SALA -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Sala</label>
+                <select class="form-select" [(ngModel)]="sessao.sala.id" name="salaId" required>
+                    <option [value]="0" disabled>Selecione uma sala...</option>
+                    <option *ngFor="let s of listaSalas" [value]="s.id">
+                        {{ s.nome }} ({{ s.capacidade }} lug.)
+                    </option>
+                </select>
+            </div>
+
+            <!-- Input de DATA E HORA -->
+            <div class="mb-4">
+                <label class="form-label fw-bold">Data e Hora</label>
+                <!-- O input 'datetime-local' gera string ISO (ex: 2025-11-25T19:00) -->
+                <input type="datetime-local" [(ngModel)]="sessao.dataHora" name="dataHora" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success px-5 fw-bold w-100">Agendar Sessão</button>
+        </form>
+    </div>
+</div>

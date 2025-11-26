@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import br.univille.fabsoft_backend.entity.Sala;
 import br.univille.fabsoft_backend.service.SalaService;
 
@@ -31,8 +30,21 @@ public class SalaController {
         return ResponseEntity.ok(sala);
     }
 
+    // --- AQUI ESTÁ A VALIDAÇÃO ---
     @PostMapping
-    public ResponseEntity<Sala> create(@RequestBody Sala sala) {
+    public ResponseEntity<?> create(@RequestBody Sala sala) {
+        // 1. Verifica se já existe uma sala com esse nome
+        Sala existente = salaService.getByNome(sala.getNome());
+        
+        if (existente != null) {
+            // Retorna Erro 409 (Conflict) se achar o nome
+            return ResponseEntity.status(409).body("Já existe uma sala com o nome '" + sala.getNome() + "'");
+        }
+
+        // 2. Prepara para salvar
+        sala.setId(null); 
+        
+        // 3. Salva e retorna
         return ResponseEntity.ok(salaService.save(sala));
     }
 

@@ -23,11 +23,18 @@ export class DashboardComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+    this.carregarDados();
+
+    this.filmeService.onAtualizacao.subscribe(() => {
         this.carregarDados();
-        this.filmeService.onAtualizacao.subscribe(() => {
-            this.carregarDados();
-        });
-    }
+    });
+
+    // 3. Ouve alterações nas SESSÕES (Faltava este aqui?)
+    this.sessaoService.onAtualizacao.subscribe(() => {
+        console.log("Sessão criada! Atualizando dashboard..."); // Log para teste
+        this.carregarDados();
+    });
+}
 
     carregarDados() {
         // 1. Conta os Filmes

@@ -19,20 +19,18 @@ export class LoginComponent {
 
   fazerLogin() {
     this.http.post<any>('http://localhost:8080/api/v1/auth/login', this.usuario)
-      .subscribe({
+       .subscribe({
         next: (resposta) => {
-          // Salva no navegador
           localStorage.setItem('usuario', JSON.stringify(resposta));
 
-          // Verifica se é ADMIN ou CLIENTE (o Backend manda o Enum como String)
           if (resposta.tipo === 'ADMIN') {
-            // alert('Bem-vindo Admin!');
+            // Redireciona direto pro Admin
             this.router.navigate(['/admin']);
           } else {
-            alert('Login realizado com sucesso!');
+            // Redireciona direto pra Home
             this.router.navigate(['/']);
           }
-        }, // <--- ESSA VÍRGULA ESTAVA FALTANDO
+        },
         error: (erro) => {
           // Tratamento de erro (ex: 401 Unauthorized)
           if (erro.status === 401) {

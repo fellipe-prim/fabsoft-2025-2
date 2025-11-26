@@ -1,1 +1,54 @@
-<p>cadastro works!</p>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card border-0 shadow-lg p-4" style="width: 100%; max-width: 500px; border-radius: 15px;">
+        <div class="card-body">
+            
+            <h3 class="text-center fw-bold mb-2">Crie sua Conta</h3>
+            <p class="text-center text-muted mb-4 small">Preencha os dados para acessar o CineFab</p>
+            
+            <form (ngSubmit)="cadastrar()">
+                
+                <!-- Nome -->
+                <div class="mb-3">
+                    <label class="form-label small text-muted fw-bold">NOME COMPLETO</label>
+                    <input type="text" [(ngModel)]="usuario.nome" name="nome" 
+                           class="form-control bg-light border-0 py-2" placeholder="Seu nome" required>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label small text-muted fw-bold">EMAIL</label>
+                    <input type="email" [(ngModel)]="usuario.email" name="email" 
+                           class="form-control bg-light border-0 py-2" placeholder="seu@email.com" required>
+                </div>
+
+                <!-- Telefone -->
+                <div class="mb-3">
+                    <label class="form-label small text-muted fw-bold">TELEFONE</label>
+                    <input type="text" [(ngModel)]="usuario.telefone" name="telefone" 
+                           class="form-control bg-light border-0 py-2" placeholder="(00) 00000-0000" required>
+                </div>
+
+                <!-- Senha -->
+                <div class="mb-4">
+                    <label class="form-label small text-muted fw-bold">SENHA</label>
+                    <input type="password" [(ngModel)]="usuario.senha" name="senha" 
+                           class="form-control bg-light border-0 py-2" placeholder="Crie uma senha segura" required>
+                </div>
+
+                <!-- Botão -->
+                <button type="submit" class="btn btn-dark w-100 py-2 fw-bold rounded-3 mb-3">
+                    FINALIZAR CADASTRO
+                </button>
+            </form>
+
+            <!-- Link Login -->
+            <div class="text-center mt-3 border-top pt-3">
+                <p class="small text-muted mb-1">Já tem uma conta?</p>
+                <a routerLink="/login" class="text-decoration-none fw-bold text-dark">
+                    Fazer Login
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

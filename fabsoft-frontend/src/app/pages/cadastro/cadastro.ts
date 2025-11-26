@@ -1,11 +1,39 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './cadastro.html',
-  styleUrl: './cadastro.css',
+  styleUrls: ['./cadastro.css']
 })
-export class Cadastro {
+export class CadastroComponent {
 
+  usuario = {
+    nome: '',
+    email: '',
+    telefone: '',
+    senha: ''
+  };
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  cadastrar() {
+    // O endpoint que criamos no AuthController
+    this.http.post('http://localhost:8080/api/v1/auth/cadastro', this.usuario)
+      .subscribe({
+        next: (res) => {
+          alert('Cadastro realizado com sucesso! Faça login.');
+          this.router.navigate(['/login']); // Manda para tela de login
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Erro ao cadastrar. Tente novamente.');
+        }
+      });
+  }
 }

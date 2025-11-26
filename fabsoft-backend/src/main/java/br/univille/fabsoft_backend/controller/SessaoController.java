@@ -1,7 +1,7 @@
 package br.univille.fabsoft_backend.controller;
 
 import java.util.List;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +23,11 @@ public class SessaoController {
     public ResponseEntity<List<Sessao>> getAll() {
         return ResponseEntity.ok(sessaoService.getAll());
     }
+    
+    @GetMapping("/filme/{filmeId}")
+    public ResponseEntity<List<Sessao>> getByFilmeId(@PathVariable Long filmeId) {
+        return ResponseEntity.ok(sessaoService.getByFilmeId(filmeId));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Sessao> getById(@PathVariable Long id) {
@@ -33,8 +38,11 @@ public class SessaoController {
         return ResponseEntity.ok(sessao);
     }
 
+    // --- CORREÇÃO AQUI ---
     @PostMapping
     public ResponseEntity<Sessao> create(@RequestBody Sessao sessao) {
+        sessao.setId(null); 
+        
         Sessao novaSessao = sessaoService.save(sessao);
         return ResponseEntity.ok(novaSessao);
     }
@@ -52,11 +60,5 @@ public class SessaoController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         sessaoService.delete(id);
         return ResponseEntity.noContent().build();
-    }
-    
-        @GetMapping("/filme/{filmeId}")
-    public ResponseEntity<List<Sessao>> getByFilmeId(@PathVariable Long filmeId) {
-        List<Sessao> lista = sessaoService.getByFilmeId(filmeId);
-        return ResponseEntity.ok(lista);
     }
 }

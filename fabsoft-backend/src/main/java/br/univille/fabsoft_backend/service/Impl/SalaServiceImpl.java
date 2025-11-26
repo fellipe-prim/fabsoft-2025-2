@@ -50,4 +50,9 @@ public class SalaServiceImpl implements SalaService {
     public void delete(Long id) {
         salaRepository.deleteById(id);
     }
+
+    @Override
+    public Sala getByNome(String nome) {
+    return salaRepository.findByNome(nome);
+}
 }

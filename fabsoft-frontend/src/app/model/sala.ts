@@ -4,5 +4,5 @@ export class Sala {
     id:number;
     nome:string;
     capacidade:number;
-    assentos: Assento[] = [];
+    assentos?: any[];
 }

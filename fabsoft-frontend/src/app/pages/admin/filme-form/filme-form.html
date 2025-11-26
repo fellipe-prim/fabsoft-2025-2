@@ -6,7 +6,8 @@
 
     <div class="card shadow-sm border-0 p-4">
         <form (ngSubmit)="salvar()">
-            
+
+            <!-- Linha 1: Título e Gênero -->
             <div class="row mb-3">
                 <div class="col-md-8">
                     <label class="form-label fw-bold">Título</label>
@@ -18,6 +19,7 @@
                 </div>
             </div>
 
+            <!-- Linha 2: Horas e Minutos -->
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Horas</label>
@@ -25,15 +27,23 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Minutos</label>
-                    <input type="number" [(ngModel)]="filme.minutos" name="minutos" class="form-control" required>
+                    <!-- Aqui está a função de verificar o tempo que criamos -->
+                    <input type="number" 
+                           [(ngModel)]="filme.minutos" 
+                           (ngModelChange)="verificarTempo()" 
+                           name="minutos"
+                           class="form-control" required>
                 </div>
-            </div>
+            </div> <!-- ESTA TAG DE FECHAMENTO ESTAVA FALTANDO -->
 
+            <!-- URL da Imagem -->
             <div class="mb-3">
                 <label class="form-label fw-bold">URL da Imagem (Poster)</label>
-                <input type="text" [(ngModel)]="filme.imagemURL" name="imagemURL" class="form-control" placeholder="https://...">
+                <input type="text" [(ngModel)]="filme.imagemURL" name="imagemURL" class="form-control"
+                    placeholder="https://...">
             </div>
 
+            <!-- Sinopse -->
             <div class="mb-4">
                 <label class="form-label fw-bold">Sinopse</label>
                 <textarea [(ngModel)]="filme.sinopse" name="sinopse" rows="4" class="form-control"></textarea>

@@ -19,7 +19,7 @@ export class SalaComponent {
 
   ngOnInit(){
     console.log('Carregando Sala...')
-    this.salaService.getSala().subscribe( sala => {
+    this.salaService.listar().subscribe( sala => {
       this.listaSala = sala
     })
   }

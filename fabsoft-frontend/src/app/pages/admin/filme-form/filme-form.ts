@@ -36,4 +36,21 @@ export class FilmeFormComponent implements OnInit {
       this.router.navigate(['/admin/filmes']);
     });
   }
+
+    verificarTempo() {
+    if (this.filme.minutos >= 60) {
+      this.filme.horas += 1;
+      this.filme.minutos = this.filme.minutos - 60;
+    }
+        if (this.filme.minutos < 0) {
+      if (this.filme.horas > 0) {
+        this.filme.horas -= 1;
+        this.filme.minutos = 59;
+      } else {
+        this.filme.minutos = 0;
+      }
+    }
+  }
+
+
 }

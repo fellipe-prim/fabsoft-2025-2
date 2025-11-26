@@ -1,0 +1,79 @@
+<div class="container py-5">
+    <h2 class="mb-4 fw-bold">Meus Ingressos</h2>
+
+    <!-- Estado de Carregando -->
+    <div *ngIf="carregando" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+
+    <!-- Estado Vazio -->
+    <div *ngIf="!carregando && meusIngressos.length === 0" class="text-center py-5 bg-light rounded-3">
+        <i class="bi bi-ticket-perforated display-1 text-muted"></i>
+        <h3 class="mt-3 text-muted">Você ainda não tem ingressos.</h3>
+        <p>Que tal assistir um filme hoje?</p>
+        <a routerLink="/" class="btn btn-primary mt-2">Ver Programação</a>
+    </div>
+
+    <!-- Lista de Ingressos -->
+    <div class="row g-4" *ngIf="meusIngressos.length > 0">
+        <div class="col-md-6 col-lg-4" *ngFor="let item of meusIngressos">
+            
+            <div class="card border-0 shadow-sm h-100 overflow-hidden ticket-card">
+                <div class="row g-0 h-100">
+                    <!-- Faixa colorida lateral -->
+                    <div class="col-1 bg-dark d-flex align-items-center justify-content-center">
+                        <span class="text-white vertical-text small tracking-wide">CINEFAB</span>
+                    </div>
+                    
+                    <div class="col-11">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold mb-1">{{ item.sessao?.filme?.titulo }}</h5>
+                            <span class="badge bg-secondary mb-3">{{ item.sessao?.filme?.genero }}</span>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div class="text-muted small">
+                                    <i class="bi bi-calendar-event me-1"></i>
+                                    <!-- Tratamento da Data Array do Java -->
+                                    <ng-container *ngIf="item.sessao?.dataHora?.length">
+                                        {{ item.sessao?.dataHora[2] }}/{{ item.sessao?.dataHora[1] }}
+                                    </ng-container>
+                                </div>
+                                <div class="text-muted small">
+                                    <i class="bi bi-clock me-1"></i>
+                                    <ng-container *ngIf="item.sessao?.dataHora?.length">
+                                        {{ item.sessao?.dataHora[3] | number:'2.0' }}:{{ item.sessao?.dataHora[4] | number:'2.0' }}
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                            <hr class="my-2">
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div>
+                                    <small class="text-muted d-block" style="font-size: 0.7rem">SALA</small>
+                                    <span class="fw-bold">{{ item.sessao?.sala?.nome }}</span>
+                                </div>
+                                <div class="text-end">
+                                    <small class="text-muted d-block" style="font-size: 0.7rem">ASSENTO</small>
+                                    <span class="badge bg-success fs-5">{{ item.numeroAssento }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .vertical-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        letter-spacing: 2px;
+    }
+    .ticket-card {
+        border-left: 5px solid #e50914 !important; /* Detalhe vermelho */
+    }
+</style>

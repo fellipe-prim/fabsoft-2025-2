@@ -7,4 +7,5 @@ import br.univille.fabsoft_backend.entity.Sala;
 
 @Repository
 public interface SalaRepository extends JpaRepository<Sala, Long> {
+    Sala findByNome(String nome);
 }
