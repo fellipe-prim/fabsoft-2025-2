@@ -1,7 +1,7 @@
 package br.univille.fabsoft_backend.controller;
 
 import br.univille.fabsoft_backend.entity.Usuario;
-import br.univille.fabsoft_backend.entity.TipoUsuario; // Importe seu Enum
+import br.univille.fabsoft_backend.entity.TipoUsuario;
 import br.univille.fabsoft_backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

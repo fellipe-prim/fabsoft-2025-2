@@ -6,9 +6,10 @@
             Painel Admin
         </div>
         <div class="list-group list-group-flush">
-            <a routerLink="/admin" class="list-group-item list-group-item-action list-group-item-dark p-3">
-                <i class="bi bi-speedometer2 me-2"></i> Início
-            </a>
+            <li routerLink="/" style="cursor: pointer;">
+                <i class="fas fa-home"></i> <!-- Ícone de Casa -->
+                <span style="margin-left: 10px;">Voltar ao Site</span>
+            </li>
             <a routerLink="/admin/filmes" class="list-group-item list-group-item-action list-group-item-dark p-3">
                 <i class="bi bi-film me-2"></i> Gerenciar Filmes
             </a>
@@ -33,7 +34,7 @@
 
             <!-- Cards de Atalho (ATUALIZADO) -->
             <div class="row g-4 mb-5"> <!-- Adicionei mb-5 para dar espaço -->
-                
+
                 <!-- Card 1: Filmes -->
                 <div class="col-md-6"> <!-- Agora ocupa metade da tela -->
                     <div class="card shadow-sm border-0 h-100">

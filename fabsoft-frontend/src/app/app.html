@@ -15,15 +15,22 @@
                     <a routerLink="/" class="nav-link text-dark fw-bold">Filmes</a>
                 </li>
                 
-                <!-- Link Meus Ingressos (Novo) -->
-                <!-- Chama a função no TS que decide se vai pra tela de ingressos ou login -->
+                <!-- Link Meus Ingressos -->
                 <li class="nav-item">
                     <a (click)="irParaIngressos()" class="nav-link text-secondary fw-bold" style="cursor: pointer;">
                         Meus Ingressos
                     </a>
                 </li>
+
+                <!-- Link Painel Admin (NOVO - Só aparece se for ADMIN) -->
+                <li class="nav-item" *ngIf="usuarioLogado?.tipo === 'ADMIN'">
+                    <a routerLink="/admin" class="nav-link text-danger fw-bold" style="cursor: pointer;">
+                        Painel Admin
+                    </a>
+                </li>
             </ul>
         </div>
+        
 
         <!-- ÁREA DE LOGIN / PERFIL -->
         
@@ -38,13 +45,12 @@
             <!-- Saudação -->
             <span class="fw-bold text-dark">
                 Olá, 
-                <!-- Lógica Ternária: Se for ADMIN escreve 'ADM', senão escreve o NOME -->
                 <span class="text-primary">
                     {{ usuarioLogado.tipo === 'ADMIN' ? 'ADM' : usuarioLogado.nome }}
                 </span>
             </span>
 
-            <!-- Botão Sair (Ícone de porta/seta) -->
+            <!-- Botão Sair -->
             <button (click)="sair()" class="btn btn-link text-secondary text-decoration-none p-0 d-flex align-items-center" title="Sair">
                 <i class="bi bi-box-arrow-right fs-5"></i>
             </button>
@@ -53,8 +59,7 @@
     </div>
 </nav>
 
-<!-- Espaço para não cobrir o conteúdo (já que a nav é fixed) -->
+<!-- Espaço para não cobrir o conteúdo -->
 <div style="padding-top: 80px;"></div>
 
-<!-- Aqui é onde as páginas (Home, Detalhes) são carregadas -->
 <router-outlet></router-outlet>
