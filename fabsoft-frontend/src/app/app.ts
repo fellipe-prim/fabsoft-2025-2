@@ -12,7 +12,7 @@ import { Router, RouterModule } from '@angular/router';
 export class AppComponent {
   title = 'fabsoft-frontend';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   // Essa função busca o usuário no navegador em tempo real
   get usuarioLogado() {
@@ -26,12 +26,28 @@ export class AppComponent {
     this.router.navigate(['/login']);
   }
 
-   irParaIngressos() {
+  irParaIngressos() {
     if (this.usuarioLogado) {
       this.router.navigate(['/meus-ingressos']);
     } else {
       // Se não estiver logado, manda pro login
       this.router.navigate(['/login']);
     }
+  }
+
+  irParaPerfil() {
+    if (this.usuarioLogado) {
+      this.router.navigate(['/perfil']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  get isAdmin() {
+    return this.usuarioLogado && this.usuarioLogado.tipo === 'ADMIN';
+  }
+
+  irParaAdmin() {
+    this.router.navigate(['/admin']);
   }
 }

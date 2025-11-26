@@ -1,4 +1,6 @@
 <div class="container-fluid" style="max-width: 600px;">
+    
+    <!-- Cabeçalho com Título e Botão Cancelar -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="h3">{{ sala.id ? 'Editar' : 'Nova' }} Sala</h2>
         <a routerLink="/admin/salas" class="btn btn-outline-secondary">Cancelar</a>
@@ -7,16 +9,36 @@
     <div class="card shadow-sm border-0 p-4">
         <form (ngSubmit)="salvar()">
             
+            <!-- Campo Nome -->
             <div class="mb-3">
                 <label class="form-label fw-bold">Nome da Sala</label>
-                <input type="text" [(ngModel)]="sala.nome" name="nome" class="form-control" placeholder="Ex: Sala 1, IMAX..." required>
+                <input type="text" 
+                       [(ngModel)]="sala.nome" 
+                       name="nome" 
+                       class="form-control" 
+                       placeholder="Ex: Sala 1, IMAX..." 
+                       required>
             </div>
 
+            <!-- Campo Capacidade com Limite -->
             <div class="mb-4">
                 <label class="form-label fw-bold">Capacidade</label>
-                <input type="number" [(ngModel)]="sala.capacidade" name="capacidade" class="form-control" required>
-                <div class="form-text">
-                    * Os assentos serão gerados automaticamente baseados na capacidade (Lógica futura).
+                
+                <!-- O ngModelChange chama a função que trava em 65 -->
+                <input type="number" 
+                       [(ngModel)]="sala.capacidade" 
+                       (ngModelChange)="validarCapacidade()" 
+                       name="capacidade" 
+                       class="form-control" 
+                       placeholder="Máximo 65"
+                       required>
+                
+                <!-- Mensagens de ajuda e alerta -->
+                <div class="d-flex justify-content-between mt-1">
+                    <!-- Só aparece se atingir o limite -->
+                    <div class="form-text text-warning fw-bold" *ngIf="sala.capacidade >= 65">
+                        <i class="bi bi-exclamation-triangle-fill"></i> Limite máximo (65) atingido.
+                    </div>
                 </div>
             </div>
 

@@ -9,28 +9,36 @@
         
         <!-- Menu Central -->
         <div class="d-none d-md-block ms-auto me-4">
-            <ul class="navbar-nav gap-4">
-                <!-- Link Filmes -->
+            <ul class="navbar-nav gap-4 align-items-center">
+                
+                <!-- Link Filmes (Todo mundo vê) -->
                 <li class="nav-item">
                     <a routerLink="/" class="nav-link text-dark fw-bold">Filmes</a>
                 </li>
                 
-                <!-- Link Meus Ingressos -->
-                <li class="nav-item">
-                    <a (click)="irParaIngressos()" class="nav-link text-secondary fw-bold" style="cursor: pointer;">
-                        Meus Ingressos
-                    </a>
+                <!-- Link para CLIENTE COMUM (Adicionei cursor: pointer aqui) -->
+                <ng-container *ngIf="!isAdmin">
+                    <li class="nav-item">
+                        <a (click)="irParaIngressos()" class="nav-link text-secondary fw-bold" style="cursor: pointer;">
+                            Meus Ingressos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="irParaPerfil()" class="nav-link text-secondary fw-bold" style="cursor: pointer;">
+                            Meu Perfil
+                        </a>
+                    </li>
+                </ng-container>
+
+                <!-- Link para ADMIN (Botão Vermelho de Destaque) -->
+                <li class="nav-item" *ngIf="isAdmin">
+                    <button (click)="irParaAdmin()" class="btn btn-danger btn-sm fw-bold px-3 rounded-pill">
+                        <i class="bi bi-speedometer2 me-1"></i> PAINEL ADMIN
+                    </button>
                 </li>
 
-                <!-- Link Painel Admin (NOVO - Só aparece se for ADMIN) -->
-                <li class="nav-item" *ngIf="usuarioLogado?.tipo === 'ADMIN'">
-                    <a routerLink="/admin" class="nav-link text-danger fw-bold" style="cursor: pointer;">
-                        Painel Admin
-                    </a>
-                </li>
             </ul>
         </div>
-        
 
         <!-- ÁREA DE LOGIN / PERFIL -->
         
@@ -45,12 +53,13 @@
             <!-- Saudação -->
             <span class="fw-bold text-dark">
                 Olá, 
+                <!-- Lógica Ternária: Se for ADMIN escreve 'ADM', senão escreve o NOME -->
                 <span class="text-primary">
                     {{ usuarioLogado.tipo === 'ADMIN' ? 'ADM' : usuarioLogado.nome }}
                 </span>
             </span>
 
-            <!-- Botão Sair -->
+            <!-- Botão Sair (Ícone de porta/seta) -->
             <button (click)="sair()" class="btn btn-link text-secondary text-decoration-none p-0 d-flex align-items-center" title="Sair">
                 <i class="bi bi-box-arrow-right fs-5"></i>
             </button>
@@ -59,7 +68,8 @@
     </div>
 </nav>
 
-<!-- Espaço para não cobrir o conteúdo -->
+<!-- Espaço para não cobrir o conteúdo (já que a nav é fixed) -->
 <div style="padding-top: 80px;"></div>
 
+<!-- Aqui é onde as páginas (Home, Detalhes) são carregadas -->
 <router-outlet></router-outlet>

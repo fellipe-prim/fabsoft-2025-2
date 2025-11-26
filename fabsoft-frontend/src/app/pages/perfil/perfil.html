@@ -1,0 +1,56 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <!-- Cabeçalho Colorido -->
+                <div class="bg-dark text-white p-4 text-center relative">
+                    <div class="mb-3">
+                        <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center text-white fw-bold display-4" 
+                             style="width: 80px; height: 80px; border: 4px solid white;">
+                            <!-- Pega a primeira letra do nome -->
+                            {{ usuario?.nome?.charAt(0)?.toUpperCase() }}
+                        </div>
+                    </div>
+                    <h3 class="fw-bold m-0">{{ usuario?.nome }}</h3>
+                    <span class="badge bg-primary mt-2">{{ usuario?.tipo }}</span>
+                </div>
+
+                <!-- Dados -->
+                <div class="card-body p-5 bg-white">
+                    
+                    <h5 class="text-muted mb-4 small fw-bold text-uppercase border-bottom pb-2">Dados da Conta</h5>
+
+                    <div class="mb-4">
+                        <label class="text-muted small fw-bold d-block mb-1">EMAIL</label>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-envelope me-3 text-secondary fs-5"></i>
+                            <span class="fs-5">{{ usuario?.email }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-muted small fw-bold d-block mb-1">TELEFONE</label>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-telephone me-3 text-secondary fs-5"></i>
+                            <!-- Se não tiver telefone, mostra um traço -->
+                            <span class="fs-5">{{ usuario?.telefone || 'Não informado' }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="d-grid gap-2 mt-5">
+                        <a routerLink="/meus-ingressos" class="btn btn-outline-dark py-2">
+                            <i class="bi bi-ticket-perforated me-2"></i> Ver meus ingressos
+                        </a>
+                        <button (click)="logout()" class="btn btn-danger py-2">
+                            Sair da Conta
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

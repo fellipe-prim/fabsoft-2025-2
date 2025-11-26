@@ -15,6 +15,8 @@ import { SalaFormComponent } from './pages/admin/sala-form/sala-form';
 import { SessaoListComponent } from './pages/admin/sessao-list/sessao-list';
 import { SessaoFormComponent } from './pages/admin/sessao-form/sessao-form';
 import { MeusIngressosComponent } from './pages/meus-ingressos/meus-ingressos';
+import { PerfilComponent } from './pages/perfil/perfil';
+
 
 
 export const routes: Routes = [
@@ -28,6 +30,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'cadastro', component: CadastroComponent },
     { path: 'meus-ingressos', component: MeusIngressosComponent },
+    { path: 'perfil', component: PerfilComponent },
 
     {
         path: 'admin',

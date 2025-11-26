@@ -44,4 +44,16 @@ export class SalaFormComponent implements OnInit {
       }
     });
   }
+
+    validarCapacidade() {
+    // Se for maior que 65, trava em 65
+    if (this.sala.capacidade > 65) {
+      this.sala.capacidade = 65;
+    }
+    
+    // Se for negativo, trava em 0 ou 1
+    if (this.sala.capacidade < 0) {
+      this.sala.capacidade = 0;
+    }
+}
 }

@@ -8,10 +8,20 @@
                 <h1 class="display-5 fw-bold text-dark">Em Cartaz</h1>
                 <p class="text-muted mt-2">Escolha seu filme e viva a experiência.</p>
             </div>
+            
+            <!-- BARRA DE PESQUISA -->
             <div class="col-md-4 text-md-end">
                 <div class="input-group border rounded-pill overflow-hidden bg-white shadow-sm">
-                    <span class="input-group-text bg-transparent border-0 ps-3"><i class="bi bi-search text-muted"></i></span>
-                    <input type="text" class="form-control bg-transparent border-0 shadow-none" placeholder="Buscar filme...">
+                    <span class="input-group-text bg-transparent border-0 ps-3">
+                        <i class="bi bi-search text-muted"></i>
+                    </span>
+                    
+                    <!-- ALTERAÇÃO AQUI: Adicionado ngModel e (input) -->
+                    <input type="text" 
+                           class="form-control bg-transparent border-0 shadow-none" 
+                           placeholder="Buscar filme..."
+                           [(ngModel)]="termoBusca"
+                           (input)="filtrar()">
                 </div>
             </div>
         </div>
@@ -19,17 +29,17 @@
         <!-- Grid de Filmes -->
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5">
             
-            <div class="col" *ngFor="let filme of filmes">
+            <!-- ALTERAÇÃO AQUI: Loop na lista filtrada -->
+            <div class="col" *ngFor="let filme of filmesFiltrados">
+                
                 <div class="card h-100 border-0 bg-transparent movie-item">
                     
-                    <!-- Imagem Clean (Sem a bola transparente) -->
+                    <!-- Imagem Clean -->
                     <div class="img-wrapper rounded-4 overflow-hidden mb-3 position-relative shadow-sm">
                         <img [src]="filme.imagemURL || 'assets/placeholder.jpg'" 
                              class="img-fluid w-100" 
                              alt="{{ filme.titulo }}"
                              style="height: 380px; object-fit: cover;">
-                        
-                        <!-- REMOVI A DIV .hover-action QUE TINHA A BOLA AQUI -->
                     </div>
 
                     <div class="card-body p-0">
@@ -46,6 +56,11 @@
                         </a>
                     </div>
                 </div>
+            </div>
+
+            <!-- Mensagem caso não encontre nada -->
+            <div *ngIf="filmesFiltrados.length === 0" class="col-12 text-center py-5">
+                <p class="text-muted fs-5">Nenhum filme encontrado com esse nome.</p>
             </div>
 
         </div>
