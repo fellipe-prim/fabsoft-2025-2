@@ -42,4 +42,19 @@ export class HomeComponent implements OnInit {
       );
     }
   }
+    getCorClassificacao(classificacao: string | undefined): string {
+    if (!classificacao) return 'bg-secondary';
+
+    const texto = classificacao.toLowerCase();
+    
+    if (texto.includes('livre')) return 'bg-success';
+    if (texto.includes('10')) return 'bg-primary';
+    if (texto.includes('12')) return 'bg-warning text-dark';
+    if (texto.includes('14')) return 'bg-warning text-dark';
+    if (texto.includes('16')) return 'bg-danger';
+    if (texto.includes('18')) return 'bg-dark';
+    
+    return 'bg-secondary';
+  }
+
 }

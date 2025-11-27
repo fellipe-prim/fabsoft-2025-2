@@ -10,7 +10,6 @@
             <!-- Coluna da Esquerda: Pôster -->
             <div class="col-md-4 mb-4">
                 <div class="poster-wrapper shadow-sm rounded-4 overflow-hidden bg-light">
-                    <!-- Adicionei o '?' e a imagem placeholder -->
                     <img [src]="filme.imagemURL || 'assets/placeholder.jpg'" 
                          alt="{{ filme.titulo }}" 
                          class="img-fluid w-100">
@@ -19,13 +18,23 @@
 
             <!-- Coluna da Direita: Informações -->
             <div class="col-md-8">
-                <span class="badge bg-light text-dark border mb-3">{{ filme.genero }}</span>
+                
+                <!-- ÁREA DE TAGS (Classificação + Gênero) -->
+                <div class="mb-3">
+                    <!-- Badge Classificação (Colorido) -->
+                    <span class="badge me-2 border" [ngClass]="getCorClassificacao(filme.classificacao)">
+                        {{ filme.classificacao || 'N/A' }}
+                    </span>
+
+                    <!-- Badge Gênero -->
+                    <span class="badge bg-light text-dark border">{{ filme.genero }}</span>
+                </div>
 
                 <h1 class="display-4 fw-bold text-dark mb-3">{{ filme.titulo }}</h1>
 
                 <!-- Informações Técnicas -->
                 <div class="mb-4">
-                    <span class="text-muted">
+                    <span class="text-muted fs-5">
                         <i class="bi bi-clock me-1"></i>
                         {{ filme.horas || 0 }}h {{ filme.minutos || 0 }}m
                     </span>
@@ -38,27 +47,21 @@
                     </p>
                 </div>
 
-                <!-- Seção de Sessões (CORRIGIDA) -->
-                <!-- Fundo escuro para destacar -->
+                <!-- Seção de Sessões -->
                 <div class="sessao-area p-4 rounded-3 border border-secondary mt-5" style="background-color: #1f1f1f;">
                     <h5 class="fw-bold mb-3 text-white">Horários Disponíveis</h5>
 
-                    <!-- Mensagem caso não tenha sessões -->
                     <p *ngIf="sessoes.length === 0" class="text-muted small">
                         Nenhuma sessão disponível para este filme.
                     </p>
 
-                    <!-- Lista de Botões -->
                     <div class="d-flex flex-wrap gap-2">
-                        
-                        <!-- Loop CORRETO (Sem aninhamento) -->
                         <button *ngFor="let sessao of sessoes" 
                                 [routerLink]="['/sessao', sessao.id]"
                                 class="btn btn-outline-light px-4 py-2 text-center" 
                                 style="min-width: 100px;">
 
-                            <!-- Lógica do Horário: Array do Java [Ano, Mes, Dia, Hora, Minuto] -->
-                            <!-- Índice 3 = Hora, Índice 4 = Minuto -->
+                            <!-- Hora formatada do Array Java -->
                             <div class="fw-bold fs-5">
                                 {{ sessao.dataHora[3] | number:'2.0-0' }}:{{ sessao.dataHora[4] | number:'2.0-0' }}
                             </div>
@@ -75,7 +78,7 @@
     </div>
 </div>
 
-<!-- Tela de Carregando (Spinner) -->
+<!-- Tela de Carregando -->
 <div *ngIf="!filme" class="container py-5 text-center">
     <div class="spinner-border text-primary" role="status"></div>
     <p class="mt-3 text-muted">Carregando detalhes do filme...</p>

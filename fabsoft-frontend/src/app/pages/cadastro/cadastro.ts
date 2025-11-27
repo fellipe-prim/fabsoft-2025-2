@@ -23,12 +23,11 @@ export class CadastroComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   cadastrar() {
-    // O endpoint que criamos no AuthController
     this.http.post('http://localhost:8080/api/v1/auth/cadastro', this.usuario)
       .subscribe({
         next: (res) => {
           alert('Cadastro realizado com sucesso! Faça login.');
-          this.router.navigate(['/login']); // Manda para tela de login
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error(err);
@@ -36,4 +35,19 @@ export class CadastroComponent {
         }
       });
   }
+
+   formatarTelefone(event: any) {
+    let input = event.target;
+    
+    let valor = input.value.replace(/\D/g, ''); 
+    
+    if (valor.length > 11) {
+        valor = valor.substring(0, 11);
+    }
+    valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2'); 
+    valor = valor.replace(/(\d)(\d{4})$/, '$1-$2'); 
+    input.value = valor;
+    this.usuario.telefone = valor;
+  }
+
 }

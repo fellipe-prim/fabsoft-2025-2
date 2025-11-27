@@ -24,8 +24,14 @@
                 <!-- Telefone -->
                 <div class="mb-3">
                     <label class="form-label small text-muted fw-bold">TELEFONE</label>
-                    <input type="text" [(ngModel)]="usuario.telefone" name="telefone" 
-                           class="form-control bg-light border-0 py-2" placeholder="(00) 00000-0000" required>
+                    <input type="tel" 
+                           [(ngModel)]="usuario.telefone" 
+                           (input)="formatarTelefone($event)" 
+                           name="telefone" 
+                           class="form-control bg-light border-0 py-2" 
+                           placeholder="(00) 00000-0000" 
+                           maxlength="15" 
+                           required>
                 </div>
 
                 <!-- Senha -->

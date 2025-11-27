@@ -15,8 +15,7 @@
                     <span class="input-group-text bg-transparent border-0 ps-3">
                         <i class="bi bi-search text-muted"></i>
                     </span>
-                    
-                    <!-- ALTERAÇÃO AQUI: Adicionado ngModel e (input) -->
+                    <!-- Input com filtro -->
                     <input type="text" 
                            class="form-control bg-transparent border-0 shadow-none" 
                            placeholder="Buscar filme..."
@@ -29,12 +28,12 @@
         <!-- Grid de Filmes -->
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5">
             
-            <!-- ALTERAÇÃO AQUI: Loop na lista filtrada -->
+            <!-- Loop na lista FILTRADA -->
             <div class="col" *ngFor="let filme of filmesFiltrados">
                 
                 <div class="card h-100 border-0 bg-transparent movie-item">
                     
-                    <!-- Imagem Clean -->
+                    <!-- Imagem -->
                     <div class="img-wrapper rounded-4 overflow-hidden mb-3 position-relative shadow-sm">
                         <img [src]="filme.imagemURL || 'assets/placeholder.jpg'" 
                              class="img-fluid w-100" 
@@ -43,12 +42,23 @@
                     </div>
 
                     <div class="card-body p-0">
-                        <div class="d-flex justify-content-between align-items-start mb-1">
-                            <h5 class="card-title fw-bold text-dark mb-0 fs-5 text-truncate pe-2" title="{{ filme.titulo }}">
-                                {{ filme.titulo }}
-                            </h5>
+                        <!-- Título -->
+                        <h5 class="card-title fw-bold text-dark mb-2 fs-5 text-truncate" title="{{ filme.titulo }}">
+                            {{ filme.titulo }}
+                        </h5>
+
+                        <!-- Área da Classificação e Gênero (NOVO) -->
+                        <div class="mb-3 d-flex align-items-center">
+                            <!-- Badge colorido baseado na idade -->
+                            <span class="badge me-2 border" [ngClass]="getCorClassificacao(filme.classificacao)">
+                                {{ filme.classificacao || 'N/A' }}
+                            </span>
+                            
+                            <!-- Gênero -->
+                            <span class="text-secondary small fw-bold text-uppercase">
+                                {{ filme.genero }}
+                            </span>
                         </div>
-                        <p class="card-text text-secondary small mb-3">{{ filme.genero }}</p>
                         
                         <!-- Botão Ingressos -->
                         <a [routerLink]="['/filme', filme.id]" class="btn btn-outline-dark w-100 rounded-3 py-2 text-uppercase small fw-bold tracking-wide btn-buy">
@@ -58,9 +68,12 @@
                 </div>
             </div>
 
-            <!-- Mensagem caso não encontre nada -->
+            <!-- Mensagem caso a busca não encontre nada -->
             <div *ngIf="filmesFiltrados.length === 0" class="col-12 text-center py-5">
-                <p class="text-muted fs-5">Nenhum filme encontrado com esse nome.</p>
+                <div class="py-5 bg-light rounded-3">
+                    <i class="bi bi-film display-4 text-muted mb-3"></i>
+                    <p class="text-muted fs-5 m-0">Nenhum filme encontrado com esse nome.</p>
+                </div>
             </div>
 
         </div>
