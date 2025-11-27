@@ -35,6 +35,11 @@ public class FilmeServiceImpl implements FilmeService {
     }
 
     @Override
+    public List<Filme> saveAll(List<Filme> filmes) {
+        return filmeRepository.saveAll(filmes);
+    }
+
+    @Override
     public Filme update(Long id, Filme filme) {
         Optional<Filme> existente = filmeRepository.findById(id);
         if (existente.isPresent()) {

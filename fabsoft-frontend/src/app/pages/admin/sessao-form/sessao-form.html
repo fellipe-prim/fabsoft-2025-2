@@ -29,11 +29,16 @@
                 </select>
             </div>
 
-            <!-- Input de DATA E HORA -->
+<!-- Input de DATA E HORA -->
             <div class="mb-4">
                 <label class="form-label fw-bold">Data e Hora</label>
-                <!-- O input 'datetime-local' gera string ISO (ex: 2025-11-25T19:00) -->
-                <input type="datetime-local" [(ngModel)]="sessao.dataHora" name="dataHora" class="form-control" required>
+                
+                <input type="datetime-local" 
+                       [(ngModel)]="sessao.dataHora" 
+                       [min]="minDate"
+                       name="dataHora" 
+                       class="form-control" 
+                       required>
             </div>
 
             <button type="submit" class="btn btn-success px-5 fw-bold w-100">Agendar Sessão</button>

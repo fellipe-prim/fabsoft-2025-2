@@ -8,5 +8,6 @@ public interface FilmeService {
     Filme getById(Long id);
     Filme save(Filme filme);
     Filme update(Long id, Filme filme);
+    List<Filme> saveAll(List<Filme> filmes);
     void delete(Long id);
 }
